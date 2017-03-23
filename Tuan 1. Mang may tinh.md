@@ -1,5 +1,5 @@
 # Mạng Máy Tính
-
+![Định dạng gói tin LAN](https://raw.githubusercontent.com/NTT-TNN/Basic_knowledge/blob/master/images/LAN.PNG)
 ## Các Khái niệm
 
 ### Mạng máy Tính
