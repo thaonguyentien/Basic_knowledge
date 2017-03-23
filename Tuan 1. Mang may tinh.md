@@ -59,7 +59,7 @@ Các hình trạng cơ bản của mạng LAN:
 - Ring
 
 Định dạng gói tin của LAN:
-![Định dạng gói tin LAN](https://raw.githubusercontent.com/NTT-TNN/Basic_knowledge/blob/master/images/LAN.PNG)
+![Định dạng gói tin LAN](https://raw.githubusercontent.com/NTT-TNN/Basic_knowledge/master/images/LAN.PNG)
 
 
 Tầng | Thiết Bị | Đặc điểm
