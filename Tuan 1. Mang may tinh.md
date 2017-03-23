@@ -124,11 +124,13 @@ Bên nhận:
 
 #### TCP vs UDP
 
-| TCP | UDP
+
+. | TCP | UDP
 ---------|----------|---------
-Tin cậy , hướng liên kết | Không tin cậy, không liên kết
+  | Tin cậy , hướng liên kết | Không tin cậy, không liên kết
  Đơn vị truyền | Segment | datagram
  Trường hợp sử dụng | Các ứng dụng cần dịch vụ với 100% độ tin cậy như mail,web | Các ứng dụng cần chuyển nhanh dữ liệu có khả năng chịu lỗi như Video Streaming,...
+ 
 
  NAT là thiết bị cho phép một (hay nhiều) địa chỉ IP nội miền được ánh xạ với một (hay nhiều) địa chỉ IP ngoại miền. Có ba loại NAT: NAT tĩnh, NAT động và NAT vượt tải(overload).
 
