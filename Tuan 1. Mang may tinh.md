@@ -141,6 +141,7 @@ Bên nhận:
 #### Các bước một gói tin TCP từ một máy tính cục bộ đi tới trang facebook.com.vn (IP là 191.58.58.59, port 433) thông qua giao thức overload NAT
 
 ![Chuyển gói tin giữu hai mạng LAN](https://raw.githubusercontent.com/NTT-TNN/Basic_knowledge/master/images/ARP.PNG)
+
 Ban đầu gói tin TCP được gửi từ một máy cục bộ có địa chỉ IP private (giả sử 10.0.0.1) gửi tới NAT. NAT sẽ ánh xạ địa chỉ IP private này vào một địa chỉ IP public ứng với một cổng (giả sử 100.123.4.5 port 123) Sau đó NAT thay thế địa chỉ trường người gửi trong gói tin TCP bằng địa chỉ IP public+ cổng sau đó sử dụng trường địa chỉ đích để gửi gói tin(cụ thể gửi tới facebook.com.vn 191.58.58.59 port 433). Sau đó NAT sử dụng giao thức ARP để gửi gói tin đến địa chỉ Facebook. Tại router nơi chứa mạng con chứa facebook. Router sẽ sử dụng bảng NAT để tìm địa chỉ IP private tương ứng với địa chỉ 191.58.58.59 port 443 nếu có sẽ chuyển tiếp đến máy đó nếu không có gói tin sẽ bị hủy.
 
 Tài liệu tham khảo :
