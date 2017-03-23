@@ -126,7 +126,7 @@ Bên nhận:
 
 | TCP | UDP
 ---------|----------|---------
-  | Tin cậy , hướng liên kết | Không tin cậy, không liên kết
+Tin cậy , hướng liên kết | Không tin cậy, không liên kết
  Đơn vị truyền | Segment | datagram
  Trường hợp sử dụng | Các ứng dụng cần dịch vụ với 100% độ tin cậy như mail,web | Các ứng dụng cần chuyển nhanh dữ liệu có khả năng chịu lỗi như Video Streaming,...
 
