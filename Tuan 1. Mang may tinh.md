@@ -8,7 +8,7 @@ Mạng máy tính là sự kết hợp các máy tính với nhau thông qua cá
 
 ### Tầng
 
-Tầng là cách tổ chức chương trình thành các thành phần chức năng riêng biệt theo một cách nhất định và theo thứ bậc. Mỗi layer thường có một giao diện duy nhất cung cấp cho layer bên trên và sử dụng giao thức do layer bên dưới cung cấp còn lại sẽ độc lập với các layer khác.
+Tầng là cách tổ chức chương trình thành các thành phần chức năng riêng biệt theo một cách nhất định và theo thứ bậc. Mỗi layer thường có một giao diện duy nhất cung cấp cho layer bên trên và sử dụng giao thức do layer bên dưới cung cấp còn lại sẽ độc lập với các layer khác.``
 
 ### Giao thức
 
