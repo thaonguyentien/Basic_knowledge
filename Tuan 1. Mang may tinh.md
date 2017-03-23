@@ -20,6 +20,7 @@ Giao thức là tập hợp các quy tắc quy định khuôn dạng, ngữ ngh�
 
 Mô hình OSI là mô hình cho phép tất cả các hệ thống có thể truyền thông với nhau mà không quan tâm kiến trúc bên dưới của chúng.
 Mô hình OSI hồm bảy tầng riêng biệt nhưng vẫn có mối liên hệ với nhau, mỗi tầng định nghĩa một quá trình truyền tin trên mạng.
+
 | Tầng | Chức năng |
 | ----------- | ------------------------------------------- |
 | Tần vật lý | Chuyển dữ liệu **thành tín hiệu và truyền** |
