@@ -33,7 +33,7 @@ Trong các DVCS các máy khách không chỉ sao chép về máy cục bộ cá
 
 ### Git cơ bản
 
-#### Điểm khác biệt giữa Git và các VCS khác :
+#### Điểm khác biệt giữa Git và các VCS khác
 
 - Các hệ thống VCS khác mỗi khi người sử dụng commit VCS sẽ lưu lại toàn bộ các file. Còn với Git hệ thống sẽ lưu lại một **ảnh chụp(snapshot)** các file. Với những file đã thay đổi git sẽ tạo một phiên bản mới còn với những file không thay đổi git sẽ ánh xạ file đó vào file cũ đã không thay đổi.
 - Phần lớn các thao tác trên git diễn ra cục bộ: Điều này có nghĩa là người dùng có thể thay đổi và commit thay đổi của mình ngay cả khi không có kết nối với mạng. Sau khi người dùng kết nối với mạng git sẽ tự đồng bộ với hệ thông. Điều này giúp người dùng có thể làm việc trong điều kiện không có kết nối internet.
@@ -45,3 +45,55 @@ Mỗi tệp tin trong git được quản lý dựa trên 3 trạng thái:
 - Modified: Trạng thái tệp tin đã thay đổi nhưng chưa được commit và cơ sở dữ liệu.
 - Staged : Trạng thái bạn đã đánh dấu là sẽ commit phiên bản hiện tại vào lần commit sắp tới.
 - Committed: Trạng thái dữ liệu đã được lưu trữ an toàn trong cơ sở dữ liệu
+
+Tương ứng với ba trạng thái là ba phần riêng biệt của một dự án sử dụng Git:
+
+- Thư mục git : Tương ứng với trạng thái commit. Nơi lưu trữ các metadata và cơ sở dữ liệu của dự án. Là phần được sao lưu về khi bản clone một dự án.
+- Khu vực tổ chức(staging area): Tương ứng với trạng thái staged. B
+- Thư mục làm việc: Tương ứng với trạng thái modified. Bản sao một phiên làm việc của dự án. Những tệp tin được pull về từ cơ sở dữ liệu và lưu trong ổ cứng để có thể sử dụng và chỉnh sủa.
+
+![Ba trạng thái Git](https://raw.githubusercontent.com/NTT-TNN/Basic_knowledge/master/images/Ba%20tr%E1%BA%A1ng%20th%C3%A1i%20Git.PNG)
+
+Tiến trình công việc cơ bản của Git:
+
+- Bạn thay đổi các tệp tin trong thư mục làm việc. Trạng thái modified
+- Bạn tổ chức các tệp tin, tạo ảnh mới của tệp tin đó vào thư mục staged. Trạng thái stagad. Tương ứng với câu lênh : "Git add`
+- Bạn commit ảnh của các tệp tin trong khu vực staged sẽ được lưu trữ vĩnh viện vào thư mục git. Tương ứng với câu lệnh :`Git commit -m "status"`
+
+## Cơ bản về git
+
+### Tạo một kho chứ git
+
+Có hai cách để tạo một kho chứ git
+
+- Tạo kho chứa từ thư mục cũ
+- Sao chép một kho chứa đã tồn tại
+
+#### Tạo kho chứa từ một thư mục cũ
+
+Nếu bạn đang có một thư mục chứa dự án mà bạn muốn theo dõi dự án này trong git. Bạn gõ lệnh sau vào terminal tại thư mục chứa dự án đó.
+
+`$ git init`
+
+Lệnh này tạo ra một thư mục mới có tên `.git` thư mục này chưa tất cả các tệp tin cần thiết cho kho chứa git. Bây giờ chưa hề có gì trong dự án của bạn được theo dõi hết.
+
+Nếu bạn muốn kiểm soát phiên bản cho các tệp tin sẵn có bạn nên thiết lập theo dõi các tệp tin đó và thực hiện commit lần đầu tiên. Để có thể theo dõi tệp tin bạn sử dụng lệnh `git add`
+. Để có thể commit những thay đổi bạn có thể sử dụng lệnh : `git commit -m "các thay đổi"`
+
+#### Sao chép một kho chứa đã tồn tại
+
+Nếu như bạn muốn sao chép một bản sao của một kho chứa đã có sẵn ví dụ như dự án bạn muốn đóng gói vào bạn cần sử dụng câu lệnh :`git clone url`
+ví dụ:` git clone https://github.com/NTT-TNN/Basic_knowledge.git
+`
+Sau đó thư mục chứa kho dữ liệu bạn sao chép sẽ được lưu tại thư mục bạn thực hiện câu lệnh.
+
+#### Ghi lại thay đổi vào kho chứa
+
+Bạn đã tạo được một kho chứa và bản sao dữ liệu để làm viêc. Bây giờ bạn sẽ làm việc trên bản sao đó và một khi đạt đến một trạng thái nào mà bạn muốn lưu vào ghi lại bạn sẽ cần commit chúng vào kho chứa.
+
+Mỗi tệp tin trong thư mục làm việc của bạn sẽ có thể ở một trong hai trạng thái:
+
+- Tracked: là tệp tin đã có trong danh sách theo dõi trước. Chúng có thể ở một trong ba trạng thái: Modified, unmodified và staged.
+- Untracked: Các file còn lại. Cụ thể là các file trong thư mục làm việc mà không có ảnh(lần commit) trước hoặc các file không thuộc vùng staging. Ban đầu khi bạn clone một kho chứa về tất cả các file sẽ ở trạng thái tracked và unmodified vì bạn mới tải chúng về và chưa thực hiện thay đổi nào.
+
+Khi bạn chỉnh sửa các tệp tin chúng sẽ chuyển sang trạng thái modified sau đó nếu bạn muốn commit các tệp tin đó bạn cần đưa chúng vào khu vực stage và thực hiện commit. Cứ như vậy lặp lại.
