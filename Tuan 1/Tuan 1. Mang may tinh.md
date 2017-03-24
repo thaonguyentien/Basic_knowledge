@@ -100,7 +100,7 @@ Các bước để hai máy cùng một mạng LAN gửi gói tin cho nhau:
 Máy A chỉ biết địa chỉ IP của máy B. Khi đó máy A sẽ gửi một ARP broadcast cho toàn bộ các máy trong mạng LAN để hỏi xem địa chỉ IP (IP của máy B ) ứng với MAC nào. Khi máy B nhận được gói tin này nó sẽ so sánh với IP của mình và nhận thấy đó là gói tin của mình khi đó máy B sẽ gửi một gói tin cho máy A trong đó chứa địa chỉ MAC của B và hai máy bắt đầu trao đổi thông tin với nhau.
 
 Các bước để hai máy trong hai mạng LAN gửi gói tin  cho nhau :
-
+![Chuyển gói tin giữu hai mạng LAN](https://raw.githubusercontent.com/NTT-TNN/Basic_knowledge/master/images/ARP.PNG)
 
 Giả sử Host 1 muốn gửi một packet tới host 4(192.32.63.8) trên mạng EE. Host 1 quảng bá packet trong mạng CS và không thấy địa chỉ IP khớp với địa chỉ IP của host 4. Và nó biết phải gửi gói tin tới router( dafault gateway). Để gửi packet tới router host 1 phải biết địa chỉ MAC của router trên mạng CS. Nó tìm địa chỉ này bằng cách gửi gói tin quảng bá trong mạng CS. Sau đó nó gửi frame tới router. Sau khi router nhận được gói tin dựa vào trường địa chỉ trong gói tin nó biết gói tin sẽ phải gửi tới mạng EE nơi chứa host 4. Nếu router không biết địa chỉ MAC của host 4 nó sẽ sử dụng lại giao thức ARP để xác định đỉa chỉ đó trong mạng EE. Sau đó router gửi gói tin tới host 4.Tìm hiểu thêm tại “Computer network của tanenbaun trang 469”
 
@@ -140,7 +140,6 @@ Bên nhận:
 
 #### Các bước một gói tin TCP từ một máy tính cục bộ đi tới trang facebook.com.vn (IP là 191.58.58.59, port 433) thông qua giao thức overload NAT
 
-![Chuyển gói tin giữu hai mạng LAN](https://raw.githubusercontent.com/NTT-TNN/Basic_knowledge/master/images/ARP.PNG)
 
 Ban đầu gói tin TCP được gửi từ một máy cục bộ có địa chỉ IP private (giả sử 10.0.0.1) gửi tới NAT. NAT sẽ ánh xạ địa chỉ IP private này vào một địa chỉ IP public ứng với một cổng (giả sử 100.123.4.5 port 123) Sau đó NAT thay thế địa chỉ trường người gửi trong gói tin TCP bằng địa chỉ IP public+ cổng sau đó sử dụng trường địa chỉ đích để gửi gói tin(cụ thể gửi tới facebook.com.vn 191.58.58.59 port 433). Sau đó NAT sử dụng giao thức ARP để gửi gói tin đến địa chỉ Facebook. Tại router nơi chứa mạng con chứa facebook. Router sẽ sử dụng bảng NAT để tìm địa chỉ IP private tương ứng với địa chỉ 191.58.58.59 port 443 nếu có sẽ chuyển tiếp đến máy đó nếu không có gói tin sẽ bị hủy.
 
