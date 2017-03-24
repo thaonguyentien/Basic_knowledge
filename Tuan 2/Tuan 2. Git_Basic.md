@@ -8,11 +8,6 @@
 Version Control là một hệ thống để lưu lại thay đổi của các file hoặc hệ thống file theo thời gian để bạn có thể gọi lại ( khôi phục lại) một phiên bản trước đó. Version Control System là một hệ thống cực kỳ thông minh giúp bạn làm việc đó. VCS cho phép bạn khôi phục lại một file về phiên bản trước đó, khôi phục cả dự án về phiên bản trước đó, so sánh sự thay đổi theo thời gian của từng file cũng như cả dự án, theo dõi xem ai là người thay đổi cuối cùng và nhiều hơn thế nữa.
 Sử dụng VCS đồng nghĩa với việc bạn có thể thay đổi các file một các thoải mái và dễ dàng có thể quay trở lại phiên bản trước đã commit một cách dễ dàng.
 
-Điểm khác biệt giữa Git và các VCS khác :
-
-- Các hệ thống VCS khác mỗi khi người sử dụng commit VCS sẽ lưu lại toàn bộ các file. Còn với Git hệ thống sẽ lưu lại một **ảnh chụp(snapshot)** các file. Với những file đã thay đổi git sẽ tạo một phiên bản mới còn với những file không thay đổi git sẽ ánh xạ file đó vào file cũ đã không thay đổi.
-- Phần lớn các thao tác trên git diễn ra cục bộ: Điều này có nghĩa là người dùng có thể thay đổi và commit thay đổi của mình ngay cả khi không có kết nối với mạng. Sau khi người dùng kết nối với mạng git sẽ tự đồng bộ với hệ thông. Điều này giúp người dùng có thể làm việc trong điều kiện không có kết nối internet.
-
 #### Local Version Control System
 
 Đa số mọi người quản lý phiên bản bằng cách copy file vào một thư mục khác để lưu trữ (Có thể đánh dấu theo thời gian). Nó là một cách làm rất thông dụng bởi nó đơn giản nhưng nó dễ gặp lỗi. Bạn sẽ rất dễ quên rằng mình đang ở trong thư mục nào hay vô tính chỉnh sửa file hoặc chép nhầm file mà bạn không mong muốn.
@@ -34,3 +29,19 @@ Bên cạnh đó hệ thống cũng có những bất cập nhất định. Cụ
 
 Trong các DVCS các máy khách không chỉ sao chép về máy cục bộ các phiên bản mới nhất của các tệp tin mà sao chép toàn bộ repository. Điều này giúp cho khi máy chủ quản lý phiên bản bị sập thì bất kỳ máy khách nào cũng có thể dùng để sap chép ngược lại để khôi phục lại hệ thống.
 
+![DVCS](https://raw.githubusercontent.com/NTT-TNN/Basic_knowledge/master/images/DVCS.PNG)
+
+### Git cơ bản
+
+#### Điểm khác biệt giữa Git và các VCS khác :
+
+- Các hệ thống VCS khác mỗi khi người sử dụng commit VCS sẽ lưu lại toàn bộ các file. Còn với Git hệ thống sẽ lưu lại một **ảnh chụp(snapshot)** các file. Với những file đã thay đổi git sẽ tạo một phiên bản mới còn với những file không thay đổi git sẽ ánh xạ file đó vào file cũ đã không thay đổi.
+- Phần lớn các thao tác trên git diễn ra cục bộ: Điều này có nghĩa là người dùng có thể thay đổi và commit thay đổi của mình ngay cả khi không có kết nối với mạng. Sau khi người dùng kết nối với mạng git sẽ tự đồng bộ với hệ thông. Điều này giúp người dùng có thể làm việc trong điều kiện không có kết nối internet.
+
+#### Ba trạng thái của Git
+
+Mỗi tệp tin trong git được quản lý dựa trên 3 trạng thái:
+
+- Modified: Trạng thái tệp tin đã thay đổi nhưng chưa được commit và cơ sở dữ liệu.
+- Staged : Trạng thái bạn đã đánh dấu là sẽ commit phiên bản hiện tại vào lần commit sắp tới.
+- Committed: Trạng thái dữ liệu đã được lưu trữ an toàn trong cơ sở dữ liệu
