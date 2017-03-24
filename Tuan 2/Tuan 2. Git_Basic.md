@@ -1,6 +1,5 @@
 # Basic Git
 
-
 ## Git là gì
 
 ### Version Control
@@ -97,3 +96,192 @@ Mỗi tệp tin trong thư mục làm việc của bạn sẽ có thể ở mộ
 - Untracked: Các file còn lại. Cụ thể là các file trong thư mục làm việc mà không có ảnh(lần commit) trước hoặc các file không thuộc vùng staging. Ban đầu khi bạn clone một kho chứa về tất cả các file sẽ ở trạng thái tracked và unmodified vì bạn mới tải chúng về và chưa thực hiện thay đổi nào.
 
 Khi bạn chỉnh sửa các tệp tin chúng sẽ chuyển sang trạng thái modified sau đó nếu bạn muốn commit các tệp tin đó bạn cần đưa chúng vào khu vực stage và thực hiện commit. Cứ như vậy lặp lại.
+
+```bat
+$ git status
+# On branch master
+# Changes to be committed:
+#   (use "git reset HEAD <file>..." to unstage)
+#
+#   new file:   README
+#
+# Changes not staged for commit:
+#   (use "git add <file>..." to update what will be committed)
+#
+#   modified:   benchmarks.rb
+#
+```
+
+Để kiểm tra trạng thái của tệp tin bạn có thể sử dụng lệnh`git status`
+
+Để theo dõi một tệp tin mới bạn sẽ sử dụng lệnh `git add <teentfile>` khi đó file sẽ đưa vào khu vực staging và sẽ được commit vào thư mục git tại lần commit sau.
+
+Quản lý tệp tin đã thay đổi:
+Giả sử bạn có một file muốn thay đổi và bạn tiến hành thay đổi file đó. Sau khi thay đổi xong bạn thực hiện câu lệnh `git status` và bạn thấy kết quả như sau:
+
+```bat
+$ git status
+# On branch master
+# Changes to be committed:
+#   (use "git reset HEAD <file>..." to unstage)
+#
+#   new file:   README
+#
+# Changes not staged for commit:
+#   (use "git add <file>..." to update what will be committed)
+#
+#   modified:   benchmarks.rb
+#
+```
+
+Điều này có nghĩa là tệp tin này đã được theo dõi trước đó và đã có thay đổi trong thư mục làm việc nhưng chưa được thay đổi tại vùng staging. Để thay đổi vào vùng staging thực hiện cậu lệnh `git add`. Sau đó thực hiện lệnh git status sẽ thấy kết quả là:
+
+```bat
+$ git add benchmarks.rb
+$ git status
+# On branch master
+# Changes to be committed:
+#   (use "git reset HEAD <file>..." to unstage)
+#
+#   new file:   README
+#   modified:   benchmarks.rb
+#
+```
+
+Điều này có nghĩa là tệp tin đã được đưa vào vùng staging và đợi đưa vào thư mục git tại lần commit tiếp theo. Bây giờ bạn nhận ra là bạn cần sửa lại một chi tiết nhỏ trước khi commit và thư mục git và bạn sẽ mở file ra và sửa nó. Sau đó bạn chạy `git status` và bạn sẽ thấy kết quả:
+
+```bat
+$ vim benchmarks.rb
+$ git status
+# On branch master
+# Changes to be committed:
+#   (use "git reset HEAD <file>..." to unstage)
+#
+#   new file:   README
+#   modified:   benchmarks.rb
+#
+# Changes not staged for commit:
+#   (use "git add <file>..." to update what will be committed)
+#
+#   modified:   benchmarks.rb
+#
+
+```
+
+Bạn sẽ thấy một vấn đề xảy ra đó là file `benchmarks.rb` nằm trong cả hai khu vực là staged và unstaged. Nếu bây giờ bạn thực hiện commit phiên bản đã được staged(tức là phiên bản đã add lần trước ) sẽ được thêm vào thư mục git chứ không phải phiên bản bạn đã sửa tại thư mục làm việc hiện tại. Điều này có nghĩa là nếu bạn muốn đưa tệp tin đã chỉnh sửa hiện tại vào thư mục git bạn cần thực hiện lệnh `git add`. Sau đó sẽ là  `git commit`.
+
+```bat
+$ git add benchmarks.rb
+$ git status
+# On branch master
+# Changes to be committed:
+#   (use "git reset HEAD <file>..." to unstage)
+#
+#   new file:   README
+#   modified:   benchmarks.rb
+#
+```
+
+Bỏ qua các tệp tin.
+
+Trong một số trường hợp bạn sẽ không muốn đưa một số file vào thư mục git khi đó bạn có thể liệt kê các tệp tin này trong một thư mục có tên là `.gitignore`. Đây là một ví dụ
+
+```bat
+$ cat .gitignore
+*.[oa]
+*~
+```
+
+Quy tắc trong file `.gitignore` như sau :
+
+- Dòng trống hoặc bắt đầu với # sẽ được bỏ qua
+- Các chuẩn toàn cầu hoạt động tốt hay các biểu thức chính quy(egular expression)
+- mẫu có kết thúc bằng đấu / chỉ định một thư mục.
+- bạn có thể sử dụng mẫu phủ định bằng cách thêm ! đằng trước.
+
+Xem các thay đổi một cách chi tiết
+
+Nếu `git status` chỉ cung cấp cho bạn các thay đổi một cách chung chung. Thì git cũng cung cấp một câu lệnh khác giúp bạn xem rõ hơn bạn đã thay đổi cái gì đó là `git diff`. Cụ thể `git diff` có hai dạng là:
+
+- `git diff` không sủ dụng tham số :Câu lệnh này so sánh những gì bạn đã thay đổi tại thư mục làm việc với những gì bạn đã thêm vào khu vực staging. ví dụ :
+
+```bat
+$ git diff
+diff --git a/benchmarks.rb b/benchmarks.rb
+index 3cb747f..da65585 100644
+--- a/benchmarks.rb
++++ b/benchmarks.rb
+@@ -36,6 +36,10 @@ def main
+           @commit.parents[0].parents[0].parents[0]
+         end
+
++        run_code(x, 'commits 1') do
++          git.commits.size
++        end
++
+         run_code(x, 'commits 2') do
+           log = git.commits('master', 15)
+           log.size
+```
+
+- `git diff --cached` hoặc `git diff --staged`(cho phiên bản từ 1.6.1 trở đi): Lệnh này so sánh những thay đổi giữa file được đưa vào stage và file đã được commit. Ví dụ:
+
+```bat
+$ git diff --cached
+diff --git a/README b/README
+new file mode 100644
+index 0000000..03902a1
+--- /dev/null
++++ b/README2
+@@ -0,0 +1,5 @@
++grit
++ by Tom Preston-Werner, Chris Wanstrath
++ http://github.com/mojombo/grit
++
++Grit is a Ruby library for extracting information from a Git repository
+```
+
+Bỏ qua khu vực tổ chức:
+
+Mặc dù khu vực tổ chức là một cách làm việc hay nhưng đôi khi chúng khiến quy trình làm việc trở nên phức tạp. Nếu bạn muốn bỏ qua bước này git cung cấp sắn cho bạn một lỗi tắt. Chỉ cần thêm `-a` vào trước khi thực hiện `git commit` git sẽ tự động thêm tất cả các file đã được theo dõi trước đó vào thư mục git, cho phép bạn bỏ qua bước `git add`. ví dụ
+
+```bat
+$ git status
+# On branch master
+#
+# Changes not staged for commit:
+#
+#   modified:   benchmarks.rb
+#
+$ git commit -a -m 'added new benchmarks'
+[master 83e38c7] added new benchmarks
+ 1 files changed, 5 insertions(+), 0 deletions(-)
+ ```
+
+Xem lịch sử commit:
+
+Sau khi đã commit rất nhiều lần hoặc bạn sao chép một kho chứa với các commit có sẵn. Chắc chắn bạn sẽ muốn xem lại lịch sử các commit và một cách đơn giản nhất là sử dụng lệnh `git log`. Ví dụ
+
+```bat
+
+$ git log
+commit ca82a6dff817ec66f44342007202690a93763949
+Author: Scott Chacon <schacon@gee-mail.com>
+Date:   Mon Mar 17 21:52:11 2008 -0700
+
+    changed the version number
+
+commit 085bb3bcb608e1e8451d4b2432f8ecbe6306e7e7
+Author: Scott Chacon <schacon@gee-mail.com>
+Date:   Sat Mar 15 16:40:33 2008 -0700
+
+    removed unnecessary test code
+
+commit a11bef06a3f659402fe7563abf99ad00de2209e6
+Author: Scott Chacon <schacon@gee-mail.com>
+Date:   Sat Mar 15 10:31:28 2008 -0700
+
+    first commit
+```
+
+`git log` mặc định sẽ hiện thị các commit theo trình tự thời gian từ mới nhất. `git log` có nhiều tham số tùy với nhiều thứ mà người dùng muốn hiển thị.
