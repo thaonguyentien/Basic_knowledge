@@ -224,6 +224,9 @@ Mỗi tệp tin trong thư mục làm việc của bạn sẽ có thể ở mộ
 - Untracked: Các file còn lại. Cụ thể là các file trong thư mục làm việc mà không có ảnh(lần commit) trước hoặc các file không thuộc vùng staging. Ban đầu khi bạn clone một kho chứa về tất cả các file sẽ ở trạng thái tracked và unmodified vì bạn mới tải chúng về và chưa thực hiện thay đổi nào.
 
 Khi bạn chỉnh sửa các tệp tin chúng sẽ chuyển sang trạng thái modified sau đó nếu bạn muốn commit các tệp tin đó bạn cần đưa chúng vào khu vực stage và thực hiện commit. Cứ như vậy lặp lại.
+![Lifecycle](https://raw.githubusercontent.com/NTT-TNN/Basic_knowledge/master/images/File%20Status%20LifeCycle.PNG)
+
+##### **Để kiểm tra trạng thái của tệp tin bạn có thể sử dụng lệnh`git status`**
 
 ```bat
 $ git status
@@ -239,8 +242,6 @@ $ git status
 #   modified:   benchmarks.rb
 #
 ```
-
-Để kiểm tra trạng thái của tệp tin bạn có thể sử dụng lệnh`git status`
 
 Để theo dõi một tệp tin mới bạn sẽ sử dụng lệnh `git add <teentfile>` khi đó file sẽ đưa vào khu vực staging và sẽ được commit vào thư mục git tại lần commit sau.
 
@@ -310,7 +311,7 @@ $ git status
 #
 ```
 
-Bỏ qua các tệp tin.
+##### **Bỏ qua các tệp tin**.
 
 Trong một số trường hợp bạn sẽ không muốn đưa một số file vào thư mục git khi đó bạn có thể liệt kê các tệp tin này trong một thư mục có tên là `.gitignore`. Đây là một ví dụ
 
@@ -327,7 +328,7 @@ Quy tắc trong file `.gitignore` như sau :
 - mẫu có kết thúc bằng đấu / chỉ định một thư mục.
 - bạn có thể sử dụng mẫu phủ định bằng cách thêm ! đằng trước.
 
-Xem các thay đổi một cách chi tiết
+##### **Xem các thay đổi một cách chi tiết**
 
 Nếu `git status` chỉ cung cấp cho bạn các thay đổi một cách chung chung. Thì git cũng cung cấp một câu lệnh khác giúp bạn xem rõ hơn bạn đã thay đổi cái gì đó là `git diff`. Cụ thể `git diff` có hai dạng là:
 
@@ -369,7 +370,7 @@ index 0000000..03902a1
 +Grit is a Ruby library for extracting information from a Git repository
 ```
 
-Bỏ qua khu vực tổ chức:
+##### **Bỏ qua khu vực tổ chức:**
 
 Mặc dù khu vực tổ chức là một cách làm việc hay nhưng đôi khi chúng khiến quy trình làm việc trở nên phức tạp. Nếu bạn muốn bỏ qua bước này git cung cấp sắn cho bạn một lỗi tắt. Chỉ cần thêm `-a` vào trước khi thực hiện `git commit` git sẽ tự động thêm tất cả các file đã được theo dõi trước đó vào thư mục git, cho phép bạn bỏ qua bước `git add`. ví dụ
 
@@ -386,7 +387,7 @@ $ git commit -a -m 'added new benchmarks'
  1 files changed, 5 insertions(+), 0 deletions(-)
  ```
 
-Xem lịch sử commit:
+##### **Xem lịch sử commit:**
 
 Sau khi đã commit rất nhiều lần hoặc bạn sao chép một kho chứa với các commit có sẵn. Chắc chắn bạn sẽ muốn xem lại lịch sử các commit và một cách đơn giản nhất là sử dụng lệnh `git log`. Ví dụ
 
@@ -414,5 +415,7 @@ Date:   Sat Mar 15 10:31:28 2008 -0700
 
 `git log` mặc định sẽ hiện thị các commit theo trình tự thời gian từ mới nhất. `git log` có nhiều tham số tùy với nhiều thứ mà người dùng muốn hiển thị.
 
+##### **Xóa tệp tin**
 
+Để xóa một tệp tin khỏi git, bạn phải xóa nó khỏi danh sách các tệp tin được theo dõi(chính xác là xóa các tệp tin trong vùng stage) sau đó commit. Lệnh git rm thực hiện việc đó và nó cũng xóa tệp tin đó khỏi thư mục làm việc vì thế bạn sẽ không còn thấy nó như một tệp tin chưa được theo dõi( Có nghĩa là nó đã được xóa hoàn toàn).
 
