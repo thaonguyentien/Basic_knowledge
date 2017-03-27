@@ -417,5 +417,40 @@ Date:   Sat Mar 15 10:31:28 2008 -0700
 
 ##### **Xóa tệp tin**
 
-Để xóa một tệp tin khỏi git, bạn phải xóa nó khỏi danh sách các tệp tin được theo dõi(chính xác là xóa các tệp tin trong vùng stage) sau đó commit. Lệnh git rm thực hiện việc đó và nó cũng xóa tệp tin đó khỏi thư mục làm việc vì thế bạn sẽ không còn thấy nó như một tệp tin chưa được theo dõi( Có nghĩa là nó đã được xóa hoàn toàn).
+Để xóa một tệp tin khỏi git, bạn phải xóa nó khỏi danh sách các tệp tin được theo dõi(chính xác là xóa các tệp tin trong vùng stage) sau đó commit. Lệnh `git rm` thực hiện việc đó và nó cũng xóa tệp tin đó khỏi thư mục làm việc vì thế bạn sẽ không còn thấy nó như một tệp tin chưa được theo dõi( Có nghĩa là nó đã được xóa hoàn toàn).
+
+Sau khi thực hiện lệnh ta sẽ được kết quả:
+
+```text
+
+On branch master
+Your branch is ahead of 'origin/master' by 2 commits.
+  (use "git push" to publish your local commits)
+Changes to be committed:
+  (use "git reset HEAD <file>..." to unstage)
+
+deleted:    testrm.txt
+
+```
+
+Nếu bạn chỉ xóa tệp tin trong thư mục làm việc nó sẽ hiện thị trong phần thay đổi mà chưa được tổ chức để commit.
+
+```txt
+
+Changes not staged for commit:
+  (use "git add/rm <file>..." to update what will be committed)
+  (use "git checkout -- <file>..." to discard changes in working directory)
+
+modified:   Tuan 2/Tuan 2. Git_Basic.md
+deleted:    test.txt
+
+no changes added to commit (use "git add" and/or "git commit -a")
+
+```
+
+Git cũng có chức năng cho phép bạn giữ một file trong thư mục làm việc mà không đưa vào khu vực stage(không muốn theo dõi nó):
+`$ git rm --cached readme.txt`
+
+##### **Di chuyển tệp tin**
+
 
