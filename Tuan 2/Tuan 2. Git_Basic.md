@@ -285,3 +285,6 @@ Date:   Sat Mar 15 10:31:28 2008 -0700
 ```
 
 `git log` mặc định sẽ hiện thị các commit theo trình tự thời gian từ mới nhất. `git log` có nhiều tham số tùy với nhiều thứ mà người dùng muốn hiển thị.
+
+
+
