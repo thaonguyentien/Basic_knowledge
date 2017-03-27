@@ -451,6 +451,13 @@ no changes added to commit (use "git add" and/or "git commit -a")
 Git cũng có chức năng cho phép bạn giữ một file trong thư mục làm việc mà không đưa vào khu vực stage(không muốn theo dõi nó):
 `$ git rm --cached readme.txt`
 
-##### **Di chuyển tệp tin**
+##### **Phục hồi**
+
+Bạn có thể phục hồi file từ vùng stage hoặc thư mục git
+
+Phục hồi từ vùng staged:
+
+`git commit --amend`
+
 
 
