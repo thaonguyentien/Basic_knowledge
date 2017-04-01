@@ -133,7 +133,7 @@ Trả lời:
 Câu 4: Trong thuật toán DES chứng minh tính đối hợp của T và F đồng thơi chỉ rõ tại sao DES(DES^-1(x))=x với mọi x là chuỗi nhị phân 64 bit.
 
 Trả lời:
-
+![DES đói hợp](https://raw.githubusercontent.com/NTT-TNN/Basic_knowledge/master/images/DES.jpg)
 Câu 5: Các khóa con của DES có hoàn toàn biệt lập không( không thể suy ra lẫn nhau)?
 
 Trả lời:Các khóa con của DES không hoàn toàn biệt lập(có thể suy ra nhau). Ví dụ nếu ta biết khóa con 1 ta sẽ có thể tách để tìm ra đầu vào của khóa con 1 từ đó có thể tìm được khóa con 2 theo sơ đồ sinh khóa con của DES.
@@ -168,3 +168,91 @@ Sơ đồ mã hóa và giải mã CFC:
 
 ## Chương 3:Hệ mật mã khóa công khai
 
+
+Câu 1:Lập luận cụ thể chứng minh bài toán đóng thùng với một vector mang là vector siêu tăng sẽ luôn là dễ nếu có nghiệm?
+
+Trả lời: Với bài toàn đóng thúng ta sẽ dễ dàng tìm được lời giải nếu tồn tại nếu tồn tại lời giải ta chỉ cần duyệt từ phần từ cuối vector đến đầu vector nếu giá trị đó nhỏ hơn giá trị thùng có thể chứa ta sẽ thêm giá trị đó vào thùng và trừ đi giá trị đó khỏi giá trị thùng có thể chứa. Nếu giá trụ đang xét lớn hơn giá trị còn chứa được của thùng ta sẽ kết thúc thuật toán. Vậy ta dễ dàng giải được nếu tồn tại lời giải với độ phức tạp O(n).
+
+Câu 2: Chọn một số ngẫu nhiên M trong khoảng từ 5-20 thực hiện các công việc sau:
+a) Hãy xây dựng một vector siêu tăng có 5 thành phần trong đó có một thành phần đúng bằng M và số cuối cùng là 60.Cho biết các phép tính thể hiện tính tăng của dãy số.
+b) Dựa vào dãy trên xây dựng hệ mã công khai theo phương pháp mekle-hellman.
+c) Viết M dưới dạng nhị phân gọi X là 5 bit cuối cùng. Sử dụng hệ mã vừa tạo để tĩnh mã Y từ X.
+d) Với Y vừa tìm được cho biết cách giải mã để tìm X.
+
+Trả lời:
+a) Chọn M=10.
+Vector siêu tăng v=(3,4,10,20,60)
+Chứng minh tính siêu tăng: 4>3; 10>4+3;20>10+4+3;60>3+4+10+20
+
+b) Xây dựng hệ mã công khai dựa vào vector (3,4,10,20,60)
+chọn m=120, chon w(omega)=23
+=> a=w.v(mod m)=(69,92,110,100,60)
+
+Hệ mã sẽ là: Khóa công khai a=(69,92,110,100,60)
+Khóa bí mật là : (v,m,w)=((3,4,10,20,60),120,23);
+
+c) M=01010
+Y= sigma(a[i].m[i])=192
+
+d)Giải mã
+
+- Tính w' module nghịch đảo của w(tức là w.w'=1 mod m) w'=47
+- Tính Y'=Y.w' (mod m)=24
+- Ta có Y'=v.M. Tìm M: 24-20=4;4-4=0 => M=(01010)
+
+Câu 3: Trong pha thiết lập tham số của RSA tại sao lại phải chọn hai số nguyên tố p và q có độ lớn xấp xỉ nhau?
+
+Trả lời: Hai số nguyên tố p,q được chọn có độ lớn xấp xỉ nhau để tăng số lần lặp khi kẻ thù muốn tìm ra p,q bằng phương pháp vét cạn. Cụ thể để tìm p,q kẻ thù sẽ cần dùng hai vòng lặp lồng nhau. Nếu hai giá trị đó lệch nhau quá nhiều thì sẽ tìm được p,q tại những vòng lặp đầu tiên.
+
+Ví dụ:
+để tìm p,q theo duyệt toàn bộ
+
+```c
+for(i=0;i<n;++i){
+    for(j=0;j<n;++j){
+        if(i*j==n){
+            p=i;
+            q=j;
+        }
+    }
+}
+```
+
+Nếu 300=pxq=15x16 thì cần 14x300+16=4216 lần lặp
+nếu 300=2x150 thì cần 1x300+150=450 lần lặp.
+
+Câu 5: Cho p=11,q=17 trong hệ RSA. Chọn ngẫu nhiên 5<=M<=20. Thực hiện các công việc sau:
+a)Xây dựng khóa công khai và bí mật
+
+b)Tính Mã của Tin M.
+
+c)Nếu sử dụng mã này làm chữ ký xác định chứ ký cho M nói trên.
+
+d) Nếu muốn gửi một thông điệp M vừa có tính bảo mật vừa có tính xác thực cần thực hiện công việc cụ thể như thế nào?
+
+Trả lời:
+Chọn M=10
+
+a) Xây dựng khóa công khai và bí mật:
+
+```txt
+n=pxq=187
+m=(p-1)(q-1)=160
+chọn e=7
+tìm được d=23
+Khoá công khai là(7,187)
+Khóa mật mà(23,11,17)
+
+```
+
+b) Mã hóa tin M:
+
+gọi Y là bản mã của M: Y=Eza(M)=175
+
+c) Chữ ký chó M
+
+S=DzA(M)=65
+
+d)Nếu muốn vừa có tính bảo mầy vừa có tính xác xực cần gửi cả X và S. Người nhận dựa vào S để tĩnh X' nếu X'=X thì xác thực được tin cậy.
+
+## Chương 4: Chữ ký điện tử và hàm băm
