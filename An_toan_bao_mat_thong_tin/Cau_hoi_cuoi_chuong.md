@@ -148,10 +148,11 @@ Các tính chất đặc biệt của S-Box:
 - Sửa đổi một bit vào làm thay đổi ít nhất hai bit ra.
 - Khi một bit vào thay đổi và 5 bit còn lại cho thay đổi thì S-Box thể hiện ra một tính gọi là phân bố đồng nhất: So sánh bit 0 và bit 1 pử đầu ta luôn ở mức cân bằng. Tính chất này khiến cho việc phân tích theo lý thuyết thống kê để tìm cách phá giải S-Box trở nên vô nghĩa.
 
-Nếu không kể đến các tính chất trên có thể xây dựng được số S-Box là : 16x16x4
+Nếu không kể đến các tính chất trên có thể xây dựng được số S-Box là :16x16x4
 
 Câu 7: Hãy giải thích chiều dài thực sự của 2-DES là 57:
 
+![2-DES](https://raw.githubusercontent.com/NTT-TNN/Basic_knowledge/master/images/2-DES.png)
 Trả lời:
 
 Câu 8: Hãy vẽ sơ đồ giải mã cho CBC,CFB
@@ -160,9 +161,10 @@ Trả lời:
 
 Sơ đồ mã hóa và giải mã CBC:
 
-![mã hóa CBC]()
+![CBC](https://raw.githubusercontent.com/NTT-TNN/Basic_knowledge/master/images/CBC.png)
 
-Sơ đồ giải mã CBC:
+Sơ đồ mã hóa và giải mã CFC:
+![CFB](https://raw.githubusercontent.com/NTT-TNN/Basic_knowledge/master/images/CFB.png).
 
-
+## Chương 3:Hệ mật mã khóa công khai
 
