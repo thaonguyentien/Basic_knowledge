@@ -109,3 +109,60 @@ Giữa bản rõ M và bản mã R theo đầu bài có cùng độ dài nên IC
 Nếu ta sử dụng các hệ mã có bảo toàn tần xuất các ký tự thì giá trị IC sẽ bằng nhau ngược lại sẽ khác nhau.
 
 ## Chương 2: Mật mã khối và mã khóa đối xứng
+
+Câu 1: Confusion và diffusion là gì? Nguyên lý tạo ra chúng có khác nhau?
+
+Trả lời:
+
+- Confusion(hỗn loạn, rắc rối): Sự phụ thuộc của bản rõ và bản mã phải thực sự phức tạp để gây rắc rối hỗn loạn cho kẻ thù có ý định phân tích tìm quy luật để phá mã. Quan hệ hàm sỗ  giũa mã-tin là hàm phi tuyến.
+- Diffusion(khuếch tán): Làm khuếch tán những mẫu văn bản mang đặc tính thống kê(gây ra do sự dư thừa ngôn ngữ) lẫn vào toàn bộ văn bản. Từ đó gây khó khăn cho kẻ thù trong việc dò phá mã trên cơ sở thống kê cá mẫu lặp lại cao. Sự thay đổi một bit trong một khối bản rõ phải dẫn đến sự thay đổi hoàn toàn trong khối mã tạo ra.
+
+Nguyên lý tạo ra sự confusion là sử dụng phép thay thế trong khi đó diffusion được tạo ra băng phép hoán vị. Toàn bộ sơ đô biến đổi mật mã sẽ là một lưới các biến đổi thây thế-hoán vị.
+
+Câu 2: Cấu trúc sử dụng vòng lặp Feistel là gì ?Tại sao lại cần nhiều vòng lặp? Sự thực hiện các vòng lặp có hoàn toàn giống nhau?
+
+Trả lời: Chúng ta cần sử dụng nhiều vòng lặp để tạo ra tính confusion và diffusion. Các vòng lặp được thực hiện với cùng một hàm f nhưng với các tham số khác nhau. Theo đó đầu vào của một vòng lặp là đầu ra của vòng lặp trước và một khóa con.
+
+Câu 3: Tính đối hợp là gì? Tại sao cần tính đổi hợp trong thiết kế DES?
+
+Trả lời:
+
+- Tính đổi hợp của hàm f tức là hàm f bằng hàm ngược của nó: f=f^-1 hay f(f(x))=x;
+- Cần tính đối hợp trong thiết kế DES đề có thể giải mã DES. DES(DES^-1(x))=x
+
+Câu 4: Trong thuật toán DES chứng minh tính đối hợp của T và F đồng thơi chỉ rõ tại sao DES(DES^-1(x))=x với mọi x là chuỗi nhị phân 64 bit.
+
+Trả lời:
+
+Câu 5: Các khóa con của DES có hoàn toàn biệt lập không( không thể suy ra lẫn nhau)?
+
+Trả lời:Các khóa con của DES không hoàn toàn biệt lập(có thể suy ra nhau). Ví dụ nếu ta biết khóa con 1 ta sẽ có thể tách để tìm ra đầu vào của khóa con 1 từ đó có thể tìm được khóa con 2 theo sơ đồ sinh khóa con của DES.
+
+Câu 6: Các S-Box có tính chất gì đặc biết? Có thể ra bao nhiêu S-box nếu không quan tâm tới các tính chất đó?
+
+Trả lời:
+
+Các tính chất đặc biệt của S-Box:
+
+- Các bit vào luôn phụ thuộc không tuyến tính và các bit ra.
+- Sửa đổi một bit vào làm thay đổi ít nhất hai bit ra.
+- Khi một bit vào thay đổi và 5 bit còn lại cho thay đổi thì S-Box thể hiện ra một tính gọi là phân bố đồng nhất: So sánh bit 0 và bit 1 pử đầu ta luôn ở mức cân bằng. Tính chất này khiến cho việc phân tích theo lý thuyết thống kê để tìm cách phá giải S-Box trở nên vô nghĩa.
+
+Nếu không kể đến các tính chất trên có thể xây dựng được số S-Box là : 16x16x4
+
+Câu 7: Hãy giải thích chiều dài thực sự của 2-DES là 57:
+
+Trả lời:
+
+Câu 8: Hãy vẽ sơ đồ giải mã cho CBC,CFB
+
+Trả lời:
+
+Sơ đồ mã hóa và giải mã CBC:
+
+![mã hóa CBC]()
+
+Sơ đồ giải mã CBC:
+
+
+
