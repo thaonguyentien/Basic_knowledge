@@ -272,4 +272,59 @@ Câu 4: Với sơ đồ chữ ký đơn giản ban đầu, phân tích khả nă
 
 Trả lời: Với sơ đồ chữ ký đơn giản ban đầu nếu ta có một văn bản dài ta cần chia ra các khối và thực hiện ký trên các khối đó. Và chữ ký trên các đoạn văn bản đó là độc lập với nhau. Khi đó các khối có nội dung giống nhau sẽ cùng được ký bởi một chữ ký tạo điều kiện thuận lợi cho kẻ tấn công có thể thống kê và cắt ghép các đoạn văn bản để có thể lợi dung được. Cụ thể khi một người có một văn bản đã được ký khi họ đọc văn bản họ sẽ tìm ra các khối giống nhau sau đó họ sẽ tìm trong chữ ký khối đó và sau đó họ có thể dùng các khối của các văn bản khác nhau để tạo ra văn bản theo ý họ.
 
+Câu 5: Phác thảo một sơ đồ chữ ký chi tiết sử dụng thuật toán RSA và xây dựng một ví dụ minh họa bằng sô?
+
+Trả lời :
+
+ảnh
+
+Câu 6: Trong trường hợp không gian hàm băm là 64 bit khi đêm thử một lượng văn bản là 2^32 thì xác suất để tìm thấy đụng độ là bao nhiêu?
+
+Trả lời: ảnh
+
+Câu 7:Hãy nêu cách để tạo ra 2^32 văn bản có nội dung cơ bản là như nhau nhưng giá trị băm chúng hầu hết khác nhau:
+
+Trả lời:Băm một giá trị
+
+
+## Chương 5: Quán lý khóa
+
+Câu 1: Trong các giao thức thống nhất khóa SKC giữa hai bên A,B và có sử dụng trung gian C tại sao nên tránh việc để C liên lạc trực tiếp với B.
+
+Trả lời: Không nên để C liên lạc trực tiếp với B vì nếu để C liên lạc trực tiếp với B có vậy B có thể thao túng cả hai phía có thể gặp phải kẻ gian.
+
+Câu 2: Hãy liên hệ việc sử dụng khóa phiên với mô hình tấn công đã học ở chương 1?
+
+Trả lời: Việc sử dụng khóa phiên có thể giúp cho khóa được an toàn trong các mô hình tấn công đã học như: tấn công chỉ biết bản mã, tấn công chỉ biết bản rõ(vì dù có biết bản rõ nhưng sau một thời gian khóa đã thay đổi), tấn công bản rõ chọn sẵn(khóa thay đổi sau mỗi phiên khóa thay đổi nên cũng không có ý nghĩa) tương tự tấn công bản mã chọn sẵn cũng không thể phá giải được.
+
+Câu 3: Trong giao thức needham=schroeder hãy giải thích:
+
+```txt
+a) ý nghĩa của việc sử dụng giá trị ngẫu nhiên r1
+b) Bên B có thể xác thực sự tồn tại đúng của bên A bằng giá trị r2 vậy A có thể xác thực được B không?
+c)Có cần thiết phải tất cả các bên xác thực lẫn nhau không?
+
+```
+
+Trả lời:
+a) Giá trị r1 giúp cho A có thể xác thực sự tồn tại đúng của C.
+
+b) B có thể xác thực sự tồn tại đúng của A nhưng A không thể xác thực được sự tồn tại đúng của B.
+
+c) Không cần thiết tất cả các bên cần xác thực lẫn nhau.Nếu A muốn gửi khóa cho B thì A cần xác thực B nhưng B không cần xác thực A vì nếu B là nhận được một gói tin thì với anh ta không có thiệt hại gì cho mình nên anh ta có thể nhận mà không cần xác nhận.
+
+Câu 4: Phân tích vấn đề mà Denning-sacco đưa ra trong xây dựng giao thức chuyển khóa có bên thứ ba tin cậy. Giải pháp cho vấn đề này là như thế nào? Có điểm yếu nào tồn tại không?
+
+Trả lời:
+ Vấn đề denning-sacco đưa ra: Nếu bạn để bị mất một khóa phiên cũ thì một kẻ gian có thể sử dụng nó để mạo danh bạn thành công. Cụ thể do kẻ nham hiểm E đã nghe trộm nói chuyện giữa A và B. Do vậy E có thể phát lại thông điệp thứ ba trong giao thức needham-schroeder mà A đã gửi cho B trong phiên liên lạc tạo khóa phiên ks. Dó đó E có thể dễ dàng sử dung Ks để thách thức B
+
+Giải pháp cho vấn đề này: denning-sacco đã đề cải thiện giao thức needham-schrorder với việc sử dụng nhãn thời gian để hạn chế nghe trộm và phát lại của kẻ địch.
+
+Điểm yếu tồn tại: Vẫn đề chênh lệch đồng hồ giữa B và C.
+
 Câu 5:
+Vấn đề cụ thể của denning-sacco là vẫn đề chênh lệch đồng hồ giữa B và C. Cụ thể nếu trên máy C thời gian là 1491116917 nhưng trên máy B thời gian là 1491216917 và giao thức chỉ cho chêch lệch thời gian 100 thì khi gói tin đến B sẽ không bao giờ được chấp nhận. Giải pháp là sử dụng một đồng hộ chung cho tất cả các máy.
+
+Câu 8:
+
+Theo sơ đò E có thể nhận được khóa eB từ giả mạo B gửi cho A khóa eE sau đó có thể dùng nó để lấy khóa phiên từ đó làm khóa đứng giữa mạo danh hai bên và có thể nghe lén toàn bộ cuộc nói chuyện.
