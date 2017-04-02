@@ -256,3 +256,20 @@ S=DzA(M)=65
 d)Nếu muốn vừa có tính bảo mầy vừa có tính xác xực cần gửi cả X và S. Người nhận dựa vào S để tĩnh X' nếu X'=X thì xác thực được tin cậy.
 
 ## Chương 4: Chữ ký điện tử và hàm băm
+
+Câu 1:Phân biệt giữa chữ ký truyền thống và chữ ký điện tử?
+
+Trả lời:
+
+- Chữ ký truyền thống là dấu vết của con người tác động lên bản giấy đã chứa văn bản(in, viết tay). Phần chữ ký và văn bản có sẵn là độc lập không có quan hệ ràng buộc nào.
+- Chữ ký điện tử được tao ra một các khách hẳn và phưc tạp hơn. Khi có một văn bản nhị phân X người ta phải tạo ra một chữ kỹ là một văn bản nhị phân nhị phân S phụ thuộc hàm vào X, tức là S=f(X). Hơn nữa quan hệ này là bí mật. Nói cách khác trong chữ ký truyền thống thì chữ ký giống nhau với mọi nội dung văn bản còn trong chữ kỹ điện tử là tùy theo nội dung văn bản.
+
+Câu 2: Tại sao nói chữ ký điện tử có hai công dụng: vừa xác thực nội dung văn bản, vừa xác thực danh tính người ký?
+
+Trả lời: Ta nói chữ ký điện tử vừa có công dụng xác thực nội dung vừa xác thực danh tính người ký vì. Chữ ký điện tử tạo ra sự phụ thuộc hàm giữa chữ ký và nội dung văn bản. Khi một người biết được chữ ký theo văn bản người đó chỉ cần dùng khóa công khải để xác minh chữ ký đó xem có phù hợp với nội dung văn bản không như vậy chữ ký có tác dụng xác thực nội dung văn bản. Bên cạnh đó do việc sinh chữ ký đòi hỏi cần khóa bị mật mà chỉ người ký mới biết được nên chữ ký có tác dụng xác thực danh tính người ký.
+
+Câu 4: Với sơ đồ chữ ký đơn giản ban đầu, phân tích khả năng tấn công của kẻ địch theo kiểu lắp ghép nối?
+
+Trả lời: Với sơ đồ chữ ký đơn giản ban đầu nếu ta có một văn bản dài ta cần chia ra các khối và thực hiện ký trên các khối đó. Và chữ ký trên các đoạn văn bản đó là độc lập với nhau. Khi đó các khối có nội dung giống nhau sẽ cùng được ký bởi một chữ ký tạo điều kiện thuận lợi cho kẻ tấn công có thể thống kê và cắt ghép các đoạn văn bản để có thể lợi dung được. Cụ thể khi một người có một văn bản đã được ký khi họ đọc văn bản họ sẽ tìm ra các khối giống nhau sau đó họ sẽ tìm trong chữ ký khối đó và sau đó họ có thể dùng các khối của các văn bản khác nhau để tạo ra văn bản theo ý họ.
+
+Câu 5:
