@@ -328,3 +328,22 @@ Vấn đề cụ thể của denning-sacco là vẫn đề chênh lệch đồng
 Câu 8:
 
 Theo sơ đò E có thể nhận được khóa eB từ giả mạo B gửi cho A khóa eE sau đó có thể dùng nó để lấy khóa phiên từ đó làm khóa đứng giữa mạo danh hai bên và có thể nghe lén toàn bộ cuộc nói chuyện.
+
+
+Bonus:
+
+1,cơ chế ngụy trang khóa trong các hệ mã mật
+
+=>
+
+2,chọn(w,m)=1 để làm gì
+
+=>
+
+3,tại sao phải bẻ x thành các đoạn u bit mã RSA
+
+=> vì nếu để xâu có độ dài lớn hơn u bit khi mã hóa qua phép module cho n ta cũng sẽ chỉ được một chuỗi có độ dài lơn nhất là u bit sẽ dẫn đến mất mát thông tin.
+
+4,tại sao khi giao dich trên mạng cần kết hợp DES và RSA
+
+=> Cần sử dụng kết hợp DES và RSA vì RSA có tốc độ chậm hơn rất nhiều so với DES nên thường dùng RSA để khởi tạo khóa cho việc sử dụng DES.
