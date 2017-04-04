@@ -82,7 +82,7 @@ s->D
 a->E
 
 sau khi mã hóa ta sẽ được đoạn mã: ABCD CD  E DBCA
- ta thấy xác suất các từ trong sâu này ều thuộc nhóm 2 gồm các từ với tần xuất trong văn bản tiếng anh được sắp xếp giảm dần là  : `t,a,o,i,s,h,r`. Nếu ta tính xác suât của sâu ta sẽ thầy p(A)=2/11,p(B)=2/11,p(C)=3/11,p(D)=3/11,p(E)=1/11. Nếu ta sử dụng quan hệ thứ tự trong nhóm 2 để giải mã ta thấy hai ký tự trong bản mã là C và D có xác xuất lớn nhất sẽ là mã hóa của `t` trong nhóm 2 như vậy là sai vì thực tế `t` là mã hóa của A. do vậy không thể sử dụng quan hệ tần xuất trong cùng một nhóm.
+ ta thấy xác suất các từ trong sâu này đều thuộc nhóm 2 gồm các từ với tần xuất trong văn bản tiếng anh được sắp xếp giảm dần là  : `t,a,o,i,s,h,r`. Nếu ta tính xác suât của sâu ta sẽ thầy p(A)=2/11,p(B)=2/11,p(C)=3/11,p(D)=3/11,p(E)=1/11. Nếu ta sử dụng quan hệ thứ tự trong nhóm 2 để giải mã ta thấy hai ký tự trong bản mã là C và D có xác xuất lớn nhất sẽ là mã hóa của `t` trong nhóm 2 như vậy là sai vì thực tế `t` là mã hóa của A. do vậy không thể sử dụng quan hệ tần xuất trong cùng một nhóm.
 
  Câu 15 : Tại sao nói quy luật tần suất không đông đều chi phối mạnh mẽ hơn ở các từ có độ dài lớn hơn.
 
