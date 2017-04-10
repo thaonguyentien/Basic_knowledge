@@ -1,5 +1,7 @@
 # An toàn và bảo mật thông tin
 
+## Xem lại merrkle hellman
+
 ## Chương 1. Các khái niệm cơ sở và hệ mã cổ điển
 
 Câu 1: Phân biệt các thuật ngữ cryptography, cryptanalysis, cryptology. "Khoa học mật mã" tương ứng với từ tiếng anh nào?
@@ -26,9 +28,13 @@ Trả lời:
 Ví dụ:
 
 - Đối với hệ mã ASCII Code: Nếu một người nhận được đoạn văn bản `97 110 32 116 111 97 110 32 98 97 111 32 109 97 116 32 116 104 111 110 103 32 116 105 110` người đó dễ dàng giải mã được chuỗi thông tin `an toan bao mat thong tin`.
-- Đối vơi hệ mật mã afine cipher: Nếu một người nhận được đoạn văn bản `wj pkwj xwk iwp pdkjc pej` nếu người đó không biết khóa là (1,4) thì người đó sẽ không thể giải mã ra chuỗi tin ban đầu là `an toan bao mat thong tin` mặc dù người đó biết đoạn mã được mã hóa bằng hệ mã afine cipher.
+- Đối vơi hệ mật mã afine cipher: Nếu một người nhận được đoạn văn bản `wj pkwj xwk iwp pdkjc pej` nếu người đó không biết khóa là cặp (1,4) thì người đó sẽ không thể giải mã ra chuỗi tin ban đầu là `an toan bao mat thong tin` mặc dù người đó biết đoạn mã được mã hóa bằng hệ mã afine cipher.
 
 Câu 4: Hãy phân tích ý nghĩa của luật Kirchoff để thấy tại sao hệ mật mã hiện đại không chấp nhận quan điểm che giấu thuật toán mật mã:
+
+Trả lời:
+
+Luật Kirchoff khẳng định toàn bộ cơ chế sinh mã và giải mã ngoài trừ thông tin về khóa là không bí mật với kẻ thù. Các hệ mật mã hiện đại không chấp nhận quan điểm che giấu thuật toán mật mã vì thuật toán mã hóa giải mã được che giấu thì nếu muốn trả đổi thông tin với một người nào ta phải chi người đó biết thuật toán giải mã và khóa việc che giấu thuật toán làm cho việc trao đổi trở nên phức tạp hơn nếu số lượng người trao đổi rất nhiều. Hơn nữa nếu sử dụng hệ mã hóa công khai thì khi một người muốn gửi thông tin cho mình họ không biết thuật toán thì điều đó là vô nghĩa. Nếu ta chỉ công khai khóa và không công khai thuật toán thì không còn ý nghĩa của hệ mật mã này.
 
 Câu 5: Phân tích nhược điểm chính của hệ mã đối xứng(SKC):
 
@@ -46,6 +52,8 @@ Trả lời:
 - Hệ mã công khai đơn giản hóa việc tạo,quản lý khóa: cụ thể mỗi người chỉ cần quản lý một cặp khóa là có thể trao đổi với tất cả mọi người khác.
 - Hệ mã công khai giúp phân biệt được người mã hóa và giải mã.
 - Cho phép xây dựng chữ ký điện tử cũng như dịch vụ không thể phủ nhận được.
+
+Câu 7,8,9,10: Lý thuyết trong sách giáo khoa.
 
 Câu 11 : Tìm số lượng khóa thực sử được dùng với khóa nhân tính. Hãy lập luận chi tiết:
 
@@ -153,7 +161,12 @@ Nếu không kể đến các tính chất trên có thể xây dựng được 
 Câu 7: Hãy giải thích chiều dài thực sự của 2-DES là 57:
 
 ![2-DES](https://raw.githubusercontent.com/NTT-TNN/Basic_knowledge/master/images/2-DES.png)
-Trả lời:
+
+Trả lời: Ta xét khóa DES(k2,P) ta thất k2 có 2 mũ 56 khả năng. Với mỗi khả năng của k2 ta tính giá C1 là bản mã sau khi đã mã hóa P với k2 lưu cặp giá trị k2,x1 này vào một bảng T.
+
+Bây giờ xét khóa C=DES(k1,c1') với C1 là các giá trị tính được ở khóa trên.
+
+Ta sẽ tiến hành rõ để tìm k1 bằng cách giải mã dựa vào công thức c1'=DES-1(k1,C) . Với mỗi giá trị c1' ta sẽ so sánh với giá trị c1 trong bảng T nếu tìm thấy thì cặp khóa đó là k1 và khóa k2 là khóa tương ứng với c1 trong bảng T.
 
 Câu 8: Hãy vẽ sơ đồ giải mã cho CBC,CFB
 
@@ -171,13 +184,18 @@ Sơ đồ mã hóa và giải mã CFC:
 
 Câu 1:Lập luận cụ thể chứng minh bài toán đóng thùng với một vector mang là vector siêu tăng sẽ luôn là dễ nếu có nghiệm?
 
-Trả lời: Với bài toàn đóng thúng ta sẽ dễ dàng tìm được lời giải nếu tồn tại nếu tồn tại lời giải ta chỉ cần duyệt từ phần từ cuối vector đến đầu vector nếu giá trị đó nhỏ hơn giá trị thùng có thể chứa ta sẽ thêm giá trị đó vào thùng và trừ đi giá trị đó khỏi giá trị thùng có thể chứa. Nếu giá trụ đang xét lớn hơn giá trị còn chứa được của thùng ta sẽ kết thúc thuật toán. Vậy ta dễ dàng giải được nếu tồn tại lời giải với độ phức tạp O(n).
+Trả lời: Với bài toàn đóng thúng ta sẽ dễ dàng tìm được lời giải nếu tồn tại nếu tồn tại lời giải ta chỉ cần duyệt từ phần từ cuối vector đến đầu vector nếu giá trị đó nhỏ hơn giá trị thùng có thể chứa ta sẽ thêm giá trị đó vào thùng và trừ đi giá trị đó khỏi giá trị thùng có thể chứa. Nếu giá trị đang xét lớn hơn giá trị còn chứa được của thùng ta sẽ kết thúc thuật toán. Vậy ta dễ dàng giải được nếu tồn tại lời giải với độ phức tạp O(n).
 
 Câu 2: Chọn một số ngẫu nhiên M trong khoảng từ 5-20 thực hiện các công việc sau:
-a) Hãy xây dựng một vector siêu tăng có 5 thành phần trong đó có một thành phần đúng bằng M và số cuối cùng là 60.Cho biết các phép tính thể hiện tính tăng của dãy số.
+
+```txt
+a) Hãy xây dựng một vector siêu tăng có 5 thành phần trong đó có một thành phần đúng bằng M và số cuối 
+cùng là 60.Cho biết các phép tính thể hiện tính tăng của dãy số.
 b) Dựa vào dãy trên xây dựng hệ mã công khai theo phương pháp mekle-hellman.
 c) Viết M dưới dạng nhị phân gọi X là 5 bit cuối cùng. Sử dụng hệ mã vừa tạo để tĩnh mã Y từ X.
 d) Với Y vừa tìm được cho biết cách giải mã để tìm X.
+
+```
 
 Trả lời:
 a) Chọn M=10.
@@ -188,7 +206,7 @@ b) Xây dựng hệ mã công khai dựa vào vector (3,4,10,20,60)
 chọn m=120, chon w(omega)=23
 => a=w.v(mod m)=(69,92,110,100,60)
 
-Hệ mã sẽ là: Khóa công khai a=(69,92,110,100,60)
+Hệ mã sẽ là: Khóa công khai a=(69,92,110,100,60,120)
 Khóa bí mật là : (v,m,w)=((3,4,10,20,60),120,23);
 
 c) M=01010
@@ -222,13 +240,18 @@ Nếu 300=pxq=15x16 thì cần 14x300+16=4216 lần lặp
 nếu 300=2x150 thì cần 1x300+150=450 lần lặp.
 
 Câu 5: Cho p=11,q=17 trong hệ RSA. Chọn ngẫu nhiên 5<=M<=20. Thực hiện các công việc sau:
+
+```txt
 a)Xây dựng khóa công khai và bí mật
 
 b)Tính Mã của Tin M.
 
 c)Nếu sử dụng mã này làm chữ ký xác định chứ ký cho M nói trên.
 
-d) Nếu muốn gửi một thông điệp M vừa có tính bảo mật vừa có tính xác thực cần thực hiện công việc cụ thể như thế nào?
+d) Nếu muốn gửi một thông điệp M vừa có tính bảo mật vừa có tính xác thực cần thực hiện công việc cụ thể 
+như thế nào?
+
+```
 
 Trả lời:
 Chọn M=10
@@ -253,7 +276,16 @@ c) Chữ ký chó M
 
 S=DzA(M)=65
 
-d)Nếu muốn vừa có tính bảo mầy vừa có tính xác xực cần gửi cả X và S. Người nhận dựa vào S để tĩnh X' nếu X'=X thì xác thực được tin cậy.
+d)Nếu muốn thông báo M vừa có tính bảo mầt vừa có tính xác thực cần cần thực hiện các việc như sau:
+
+Giả sử A muốn gửi B thông báo M vừa có tính bảo mật, vừa có tính xác thực. Công việc cần thực hiện là:
+
+B1: A gửi cho B một đoạn tin Y đã được mã hóa bởi khóa bí mật của A sau đó là khóa công khai của B như sơ đồ hình 75.
+
+B2: B nhận được đoạn tin Y đầu tiên sẽ dùng khóa bí mật của mình để giải mã lần 1 thu được đoạn tin đã được mã hóa bởi khóa riêng của A sẽ tiến hành giải mã tiếp theo khóa công khai của A thu được tin ban đầu: Trang 75.
+
+Cụ thể tính xác thực là ở bước A mã hóa bằng khóa bí mật của mình điều này chỉ có thể được thực hiện bởi A nên xác thực đoạn tin đó được mã hóa bởi A vì chỉ A mới biết khóa bí mật của mình. Còn tính mật thì được thực hiên bằng cách mã hóa bằng khóa công khai của B đảm bảo chỉ có B mới có thể giải mã.
+
 
 ## Chương 4: Chữ ký điện tử và hàm băm
 
@@ -278,11 +310,16 @@ Trả lời :
 
 ảnh
 
-Câu 6: Trong trường hợp không gian hàm băm là 64 bit khi đêm thử một lượng văn bản là 2^32 thì xác suất để tìm thấy đụng độ là bao nhiêu?
+Câu 6: Trong trường hợp không gian hàm băm là 64 bit khi đem thử một lượng văn bản là 2^32 thì xác suất để tìm thấy đụng độ là bao nhiêu?
 
 Trả lời: ảnh
 
 Câu 7:Hãy nêu cách để tạo ra 2^32 văn bản có nội dung cơ bản là như nhau nhưng giá trị băm chúng hầu hết khác nhau:
+
+Trả lời:
+
+
+Câu 8: Hai văn bản có nội dung đối nghịch nhau nhưng có giá trị băm trùng nhau.
 
 Trả lời:Băm một giá trị
 
