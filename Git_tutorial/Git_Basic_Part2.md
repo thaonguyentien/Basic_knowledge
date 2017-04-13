@@ -1,22 +1,6 @@
 # Git Basic Part 2
 
-Ở phần trước ta đã tìm hiểu các khái niệm bơ bản về các VCS và git cũng như các câu lệch để làm việc với một project được quản lý bởi git. Trong part 1 chỉ đề cập đến việc làm việc với git một cách đơn lẻ nhưng một tính năng quan trọng của git là giúp mọi người cùng làm việc, hợp tác với nhau trong một project. Phần hai sẽ đi làm rõ cách để có thể cùng nhau hợp tác làm một project với git.
-
-## Làm việc từ xa
-
-Để có thể cộng tác với bất kỳ thành viên khác trên bất kỳ project sử dụng git nào bạn cần quản lý các repository của bạn. Các remote repository là các phiên bản project của bạn được lưu trữ trên internet hoặc trong một mạng nào đó. Việc làm việc với những thành viên khác trong cùng một dự án liên quan đến các công việc push, pull dữ liệu từ repository. Để có thể quản lý các remote repository(repo) bạn cần biết cách thêm, xóa các repo, quản lý nhiều nhánh khác nhau. Chúng ta sẽ đi tìm hiểu các kỹ năng quản lý này:
-
-### Hiển thị remotes
-
-Để xem project bạn đã cấu hình tới remote từ xa nào bạn có thể thực hiện câu lệch `git remote`. Nếu project của bạn được clone từ mộ repo có sẵn thường nó sẽ có một remote là origin- tên mặc định được git đặt cho remote mà bạn đã clone từ đó.
-
-Bạn có thể sử dụng tham số -v để hiện thị địa chỉ git đã lưu.
-
-```txt
-origin https://github.com/NTT-TNN/Basic_knowledge.git (fetch)
-origin https://github.com/NTT-TNN/Basic_knowledge.git (push)
-
-```
+Ở phần trước ta đã tìm hiểu các khái niệm cơ bản về các VCS và git cũng như các câu lệch cơ bản để làm việc với một project được quản lý bởi git. Trong part 1 chỉ đề cập đến việc làm việc với git một cách độc lập nhưng một tính năng quan trọng của git là giúp mọi người cùng làm việc, hợp tác với nhau trong một project. Phần hai sẽ đi làm rõ cách để có thể cùng nhau hợp tác làm một project với git.
 
 ## Phân nhánh trong git
 
@@ -323,6 +307,3 @@ Tóm tắt: tóm tắt nội dung thay đổi của commit
 git không tự động wrap text nên bạn cần làm việc đó một cách thủ công. Khuyến cáo 72 ký tự một dòng là hợp lý(do một terminal có 80 cột sử dụng 4 cột để căn lề trái, 4 cột để căn lề phải vậy còn 72 ký tự).
 
 Phần này trình bày cụ thể về thay đổi như tại sao lại thay đổi và thay đổi như thế nào.
-
-
-

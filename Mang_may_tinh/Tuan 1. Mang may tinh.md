@@ -160,7 +160,7 @@ NAT đóng gói lại gói tin với trường địa chỉ nguồn mới là IP
 Bước 3: NAT gửi gói tin đến facebook(thông qua cơ chế định tuyến và chuyển tiếp của router đã nói đến ở phần trên).
 
 
-Tài liệu tham khảo :
+## Phần 3:Tài liệu tham khảo
 
 1. Slide Mạng máy tính thầy Bùi Trọng Tùng
 1. Slide Mạng máy tính cô Trương diệu Linh
