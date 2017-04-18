@@ -1,7 +1,5 @@
 ﻿# An toàn và bảo mật thông tin
 
-## Xem lại merrkle hellman
-
 ## Chương 1. Các khái niệm cơ sở và hệ mã cổ điển
 
 Câu 1: Phân biệt các thuật ngữ cryptography, cryptanalysis, cryptology. "Khoa học mật mã" tương ứng với từ tiếng anh nào?
