@@ -1,4 +1,4 @@
-# An toàn và bảo mật thông tin
+﻿# An toàn và bảo mật thông tin
 
 ## Xem lại merrkle hellman
 
@@ -156,7 +156,7 @@ Các tính chất đặc biệt của S-Box:
 - Sửa đổi một bit vào làm thay đổi ít nhất hai bit ra.
 - Khi một bit vào thay đổi và 5 bit còn lại cho thay đổi thì S-Box thể hiện ra một tính gọi là phân bố đồng nhất: So sánh bit 0 và bit 1 pử đầu ta luôn ở mức cân bằng. Tính chất này khiến cho việc phân tích theo lý thuyết thống kê để tìm cách phá giải S-Box trở nên vô nghĩa.
 
-Nếu không kể đến các tính chất trên có thể xây dựng được số S-Box là :16x16x4
+Nếu không kể đến các tính chất trên có thể xây dựng được số S-Box là :16^(16*4)
 
 Câu 7: Hãy giải thích chiều dài thực sự của 2-DES là 57:
 
