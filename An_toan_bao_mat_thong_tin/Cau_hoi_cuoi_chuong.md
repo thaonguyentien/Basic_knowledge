@@ -1,4 +1,5 @@
-﻿# An toàn và bảo mật thông tin
+
+# An toàn và bảo mật thông tin
 
 ## Chương 1. Các khái niệm cơ sở và hệ mã cổ điển
 
@@ -187,7 +188,7 @@ Trả lời: Với bài toàn đóng thúng ta sẽ dễ dàng tìm được l�
 Câu 2: Chọn một số ngẫu nhiên M trong khoảng từ 5-20 thực hiện các công việc sau:
 
 ```txt
-a) Hãy xây dựng một vector siêu tăng có 5 thành phần trong đó có một thành phần đúng bằng M và số cuối 
+a) Hãy xây dựng một vector siêu tăng có 5 thành phần trong đó có một thành phần đúng bằng M và số cuối
 cùng là 60.Cho biết các phép tính thể hiện tính tăng của dãy số.
 b) Dựa vào dãy trên xây dựng hệ mã công khai theo phương pháp mekle-hellman.
 c) Viết M dưới dạng nhị phân gọi X là 5 bit cuối cùng. Sử dụng hệ mã vừa tạo để tĩnh mã Y từ X.
@@ -246,7 +247,7 @@ b)Tính Mã của Tin M.
 
 c)Nếu sử dụng mã này làm chữ ký xác định chứ ký cho M nói trên.
 
-d) Nếu muốn gửi một thông điệp M vừa có tính bảo mật vừa có tính xác thực cần thực hiện công việc cụ thể 
+d) Nếu muốn gửi một thông điệp M vừa có tính bảo mật vừa có tính xác thực cần thực hiện công việc cụ thể
 như thế nào?
 
 ```
