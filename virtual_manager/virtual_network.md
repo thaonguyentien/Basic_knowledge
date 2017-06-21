@@ -29,3 +29,51 @@ Trong chế độ này máy chủ vật lý họat động như một router cho
 ## 5. Isolated mode
 
 Khi sử dụng chế dộ isolated máy ảo có thể giao tiếp với nhau và giao tiếp với máy chủ vật lý nhưng chúng không thể giao tiếp với các máy chủ bên ngoài máy chủ vật lý(cả vào và ra đều không thể). Sử dụng dnsmasq là bắt buộc cho những chức năng như DHCP. Tuy nhiên ngay cả khi bị cô lập với tất cả các mạng vật lý các tên DNS vẫn được giải quyết(resolved). Do đó một tình huống xảy ra khi các tên DNS được giải quyết nhưng các yêu cầu ICMP (ping) lại bị lỗi.
+
+# Tạo 2 máy ảo với cấu hình:
+
+- RAM: 1GB
+- Ổ cứng: 20GB
+- CPU: 2 core
+- Mỗi máy có 2 card mạng như hình sau:
+
+![https://raw.githubusercontent.com/NTT-TNN/Basic_knowledge/master/images/vm_diagram.png](https://raw.githubusercontent.com/NTT-TNN/Basic_knowledge/master/images/vm_diagram.png)
+
+Các bước tiến hành:
+
+Bước 1: Tạo máy ảo với card mạng mặc định(NAT mode)
+![https://raw.githubusercontent.com/NTT-TNN/Basic_knowledge/master/images/may_ao_1.png](https://raw.githubusercontent.com/NTT-TNN/Basic_knowledge/master/images/may_ao_1.png)
+
+![https://raw.githubusercontent.com/NTT-TNN/Basic_knowledge/master/images/may_ao_2.png](https://raw.githubusercontent.com/NTT-TNN/Basic_knowledge/master/images/may_ao_2.png)
+
+![https://raw.githubusercontent.com/NTT-TNN/Basic_knowledge/master/images/may_ao_3.png](https://raw.githubusercontent.com/NTT-TNN/Basic_knowledge/master/images/may_ao_3.png)
+
+![https://raw.githubusercontent.com/NTT-TNN/Basic_knowledge/master/images/may_ao_4.png](https://raw.githubusercontent.com/NTT-TNN/Basic_knowledge/master/images/may_ao_4.png)
+
+![https://raw.githubusercontent.com/NTT-TNN/Basic_knowledge/master/images/may_ao_5.png](https://raw.githubusercontent.com/NTT-TNN/Basic_knowledge/master/images/may_ao_5.png)
+
+
+Bước 2: Tạo virtual network(isolated mode)
+![https://raw.githubusercontent.com/NTT-TNN/Basic_knowledge/master/images/vn_1.png](https://raw.githubusercontent.com/NTT-TNN/Basic_knowledge/master/images/vn_1.png)
+
+![https://raw.githubusercontent.com/NTT-TNN/Basic_knowledge/master/images/vn_2.png](https://raw.githubusercontent.com/NTT-TNN/Basic_knowledge/master/images/vn_2.png)
+
+![https://raw.githubusercontent.com/NTT-TNN/Basic_knowledge/master/images/vn_3.png](https://raw.githubusercontent.com/NTT-TNN/Basic_knowledge/master/images/vn_3.png)
+
+![https://raw.githubusercontent.com/NTT-TNN/Basic_knowledge/master/images/vn_4.png](https://raw.githubusercontent.com/NTT-TNN/Basic_knowledge/master/images/vn_4%5C.png)
+
+![https://raw.githubusercontent.com/NTT-TNN/Basic_knowledge/master/images/vn_5.png](https://raw.githubusercontent.com/NTT-TNN/Basic_knowledge/master/images/vn_5.png)
+
+![https://raw.githubusercontent.com/NTT-TNN/Basic_knowledge/master/images/vn_6.png](https://raw.githubusercontent.com/NTT-TNN/Basic_knowledge/master/images/vn_6.png)
+
+Bước 3: Add thêm card mạng isolated mode cho máy ảo
+![https://raw.githubusercontent.com/NTT-TNN/Basic_knowledge/master/images/ad_1.png](https://raw.githubusercontent.com/NTT-TNN/Basic_knowledge/master/images/ad_1.png)
+
+![https://raw.githubusercontent.com/NTT-TNN/Basic_knowledge/master/images/ad_2.png](https://raw.githubusercontent.com/NTT-TNN/Basic_knowledge/master/images/ad_2.png)
+Bước 4: Tạo IPv4 tĩnh cho từng máy ảo
+
+![https://raw.githubusercontent.com/NTT-TNN/Basic_knowledge/master/images/cf_1.png](https://raw.githubusercontent.com/NTT-TNN/Basic_knowledge/master/images/cf_1.png)
+
+![https://raw.githubusercontent.com/NTT-TNN/Basic_knowledge/master/images/cf_2.png](https://raw.githubusercontent.com/NTT-TNN/Basic_knowledge/master/images/cf_2.png)
+
+![https://raw.githubusercontent.com/NTT-TNN/Basic_knowledge/master/images/cf_3.png](https://raw.githubusercontent.com/NTT-TNN/Basic_knowledge/master/images/cf_3.png)
