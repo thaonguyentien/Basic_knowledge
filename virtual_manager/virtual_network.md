@@ -48,6 +48,7 @@ Khi sử dụng chế dộ isolated máy ảo có thể giao tiếp với nhau v
 Các bước tiến hành:
 
 Bước 1: Tạo máy ảo với card mạng mặc định(NAT mode)
+
 ![https://raw.githubusercontent.com/NTT-TNN/Basic_knowledge/master/images/may_ao_1.png](https://raw.githubusercontent.com/NTT-TNN/Basic_knowledge/master/images/may_ao_1.png)
 
 ![https://raw.githubusercontent.com/NTT-TNN/Basic_knowledge/master/images/may_ao_2.png](https://raw.githubusercontent.com/NTT-TNN/Basic_knowledge/master/images/may_ao_2.png)
