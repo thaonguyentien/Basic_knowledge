@@ -34,4 +34,5 @@ Docker registries là một kho lưu trữ các docker image. Docker hub và Doc
 
 ## Tài liệu tham khảo
 
-[https://www.digitalocean.com/community/tutorials/the-docker-ecosystem-an-introduction-to-common-components](https://www.digitalocean.com/community/tutorials/the-docker-ecosystem-an-introduction-to-common-components)
+1. [https://www.digitalocean.com/community/tutorials/the-docker-ecosystem-an-introduction-to-common-components](https://www.digitalocean.com/community/tutorials/the-docker-ecosystem-an-introduction-to-common-components)
+1. [https://docs.docker.com/engine/docker-overview](https://docs.docker.com/engine/docker-overview/)
