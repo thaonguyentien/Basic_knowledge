@@ -129,8 +129,6 @@ _Note_: Ta thấy trong tất cả các trường hợp toàn bộ traffic đề
 Kiến thúc self-serivce network bao gồm kiến trúc của provider network cộng thêm với một overlay network
 ![self_overview](https://raw.githubusercontent.com/NTT-TNN/Basic_knowledge/master/images/neutron/self_overview.png)
 
-## Tài liệu tham khảo
-[https://docs.openstack.org/newton/networking-guide/deploy-lb-provider.html#deploy-lb-provider](https://docs.openstack.org/newton/networking-guide/deploy-lb-provider.html#deploy-lb-provider)
 
 ### Network traffic flow trong self-service network
 
@@ -228,3 +226,7 @@ Cụ thể:
 - B13. The self-service bridge instance port (19) chuyển tiếp gói tin tới instance 2 interface (20) via veth pair.
 
 ![self_us4](https://raw.githubusercontent.com/NTT-TNN/Basic_knowledge/master/images/neutron/self_us4.png)
+
+## Tài liệu tham khảo
+[https://docs.openstack.org/newton/networking-guide/deploy-lb-provider.html#deploy-lb-provider](https://docs.openstack.org/newton/networking-guide/deploy-lb-provider.html#deploy-lb-provider)
+[https://docs.openstack.org/newton/networking-guide/deploy-lb-selfservice.html](https://docs.openstack.org/newton/networking-guide/deploy-lb-selfservice.html)
