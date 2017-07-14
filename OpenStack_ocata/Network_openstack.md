@@ -10,13 +10,14 @@ Linux bridge là một switch ảo. Tuy nhiên với chức năng của một sw
 
 Linux bridge trong openstack hỗ trợ các loại mạng cục bộ là:
 
+- Local
 - Flat
 - VLAN
 - VXLAN
 
 ### Mạng Flat
 
-Khi triển khai mạng Flat sẽ có một bridge ảo(brqXXXX) được tạo ra trên mỗi node và được kết nối trực tiếp đến card mạng vật lý. Tại mỗi node các máy ảo tạo ra các card mạng ảo(tapN) và kết nối tới bridge ảo để kết nối với mạng Flat. Ta thấy mỗi card mạng vật lý chỉ có thể tạo một mạng Flat do vậy nếu muốn tạo ra bao nhiêu mạng Flat ta cần có bấy nhiêu card vật lý.
+Khi triển khai mạng Flat sẽ có một bridge ảo(brqXXXX) được tạo ra trên mỗi node và bridge ảo đó sẽ được kết nối trực tiếp đến card mạng vật lý. Tại mỗi node các máy ảo tạo ra các card mạng ảo(tapN) và kết nối tới bridge ảo để kết nối với mạng Flat. Ta thấy mỗi card mạng vật lý chỉ có thể tạo một mạng Flat do vậy nếu muốn tạo ra bao nhiêu mạng Flat ta cần có bấy nhiêu card vật lý.
 
 ![Flat](https://raw.githubusercontent.com/NTT-TNN/Basic_knowledge/master/images/neutron/linuxbridge_flat.png)
 
@@ -40,7 +41,15 @@ Luồng của các L2 frame sẽ như sau:
 
 Để triển khai mạng VXLAN bằng Linux Bridge plugin, các linux bridge sẽ kết hợp với VXLAN-Device để thực hiện các chức năng của một thiết bị VTEP. VXLAN-Device được đặt tên tương ứng với ID của mạng VXLAN mà nó được triển khai.
 
-## Các kịch bản thường dụng với linuxbridge
+#### Phương thức hoạt động của tổ hợp linux bridge + VXLAN-Device như sau:
+
+- Khi cần chuyển tiếp một gói tin L2 Frame từ một máy ảo tới một máy ảo khác thuộc cùng mạng nội bộ nhưng nằm trên node khác, Linux bridge chuyển tiếp gói tin này tới VXLAN-Device. VXLAN-Device sẽ thực hiện công việc thêm VXLAN header với ID là ID của mạng VXLAN, rồi đóng gói gói tin vào UDP +IP packet. Cuối cùng gói tin IP packet này được vận chuyển với IP nguồn là IP của card vật lý mà mạng VXLAN được triển khai trên đó, IP đích là IP của card mạng vật lý triển khai VXLAN đó của node chứa máy ảo đích.
+
+- Khi tiếp nhận một gói tin IP packet từ mạng bên ngoài gửi vào, gói tin sẽ đi qua các card mạng vật lý và vào các VXLAN-Device. VXLAN-Device sẽ mở gói và kiểm tra VXLAN ID của gói tin L2 Frame. Nếu gói tin có VXLAN ID hợp lệ với mạng VXLAN này, VXLAN-Device sẽ chuyển tiếp gói tin L2 Frame nguyên bản tới Linux-bridge. Ở đây dựa theo dữ liệu mà gói tin được chuyển tiếp tới cổng kết nối với máy có MAC đích.
+
+- Trong trường hợp chuyển tiếp giữa các máy cùng mạng VXLAN và cùng nằm trên một node, gói tin được chuyển tiếp thông qua Linux Bridge.
+
+## Các kịch bản thường dùng với linuxbridge
 
 ### Provider Network
 
@@ -48,7 +57,7 @@ Kiến trúc mạng provider network cung cấp kết nối layer-2 giữa các 
 
 ![linux_provider](https://raw.githubusercontent.com/NTT-TNN/Basic_knowledge/master/images/neutron/linux_bridge_provide.png)
 
-### Network traffic flow trong provider network
+### Network traffic flow trong provider network trong triển khai openstack neutron
 
 Giả sử cấu hình các instance và các network như sau:
 
@@ -71,36 +80,38 @@ Giả sử cấu hình các instance và các network như sau:
 
 - B1. Instance interface(1) chuyển đến provider instance port(2)
 - B2. Security group rules (3) trên the provider bridge
- xử lý firewalling and theo dõi kết nối cho gói tin.
-- B3. The VLAN sub-interface port (4) trên the provider bridge chuyển gói tin tới the physical network interface (5).
+ xử lý firewalling và connection tracking packet.
+- B3. The VLAN sub-interface port (4) trên provider bridge chuyển gói tin tới physical network interface (5).
 - B4. The physical network interface (5) thêm vào VLAN tag 101 cho packet và chuyển nó tới physical network infrastructure switch (6).
-- B5. The switch loại bỏ VLAN tag 101 trong goi gin và chuyển nó tới router(7).
+- B5. The switch loại bỏ VLAN tag 101 trong gói tin và chuyển nó tới router(7).
 - B6. The router  định tuyến gói tin từ provider network(8) tới external network(9) và chuyển gói tin tới switch(10).
 - B7. The switch chuyển tiếp gói tin tới external network (11).
 - B8. The external network (12)  nhận được packet.
 
 ![provider_us1](https://raw.githubusercontent.com/NTT-TNN/Basic_knowledge/master/images/neutron/provider_us1.png)
 
-#### Thường hợp 2: Instance packet tới instance khác thuộc cùng một network
+#### Thường hợp 2: Instance gửi packet tới instance khác thuộc cùng một network
 
 Cụ thể:
 
-- Instance 1 đặt otại  compute node 1 và sử dụng provider network 1
+- Instance 1 đặt tại  compute node 1 và sử dụng provider network 1
 - Instance 2 đặt tại on compute node 2 và sử dụng provider network 1.
 - Instance 1 gửi packet tới instance 2.
 
+#### Flow packet
+
 - B1. The instance 1 interface (1) chuyển gói tin tới provider bridge instance port (2).
-- B2. Security group rules (3) treen the provider bridge xử lý firewalling và theo dõi kết nối cho gói tin.
+- B2. Security group rules (3) trên the provider bridge xử lý firewalling và  connection tracking packet.
 - B3.The VLAN sub-interface port (4) trên provider bridge chuyển gói tin tới the physical network interface (5).
 - B4. The physical network interface (5) thêm VLAN tag 101 vào gói tin và chuyển tiếp tới  physical network infrastructure switch (6).
 - B5. The switch chuyển tiếp gói tin từ compute node 1 tới compute node 2 (7).
 - B6. The physical network interface (8) loại bỏ VLAN tag 101 khỏi gói tin và chuyển tiếp tới VLAN sub-interface port (9) trên the provider bridge.
-- B7. Security group rules (10) trên the provider bridge xử lý firewalling và theo dõi kết nối cho gói tin.
+- B7. Security group rules (10) trên the provider bridge xử lý firewalling và  connection tracking packet.
 - B8. The provider bridge instance port (11) chuyển tiếp gói tin tới the instance 2 interface (12).
 
 ![provider_us2](https://raw.githubusercontent.com/NTT-TNN/Basic_knowledge/master/images/neutron/provider_us2.png)
 
-#### Thường hợp 3: Instance packet tới instance khác thuộc hai network
+#### Thường hợp 3: Instance gửi packet tới instance khác thuộc hai network
 
 Cụ thể:
 
@@ -108,8 +119,10 @@ Cụ thể:
 - Instance 2 đặt tại on compute node 1 và sử dụng provider network 2.
 - Instance 1 gửi a packet tới instance 2.
 
+#### Flow Packet
+
 - B1. The instance 1 interface (1) chuyển gói tin tới provider bridge instance port (2).
-- B2. Security group rules (3) treen the provider bridge xử lý firewalling và theo dõi kết nối cho gói tin.
+- B2. Security group rules (3) treen the provider bridge xử lý firewalling và connection tracking packet.
 - B3.The VLAN sub-interface port (4) trên provider bridge chuyển gói tin tới the physical network interface (5).
 - B4. The physical network interface (5) thêm VLAN tag 101 vào gói tin và chuyển tiếp tới  physical network infrastructure switch (6).
 - B5. The switch lọa bỏ VLAN tag 101 khỏi gói tin và chuyển tiếp gói tin tới router (7).
@@ -117,12 +130,10 @@ Cụ thể:
 - B7. The router chuyển tiếp gói tin tới switch (10).
 - B8. The switch thêm VLAN tag 102 vào gói tin và chuyển tiếp gói tin tới compute node 1 (11).
 - B9. The physical network interface (12) lọa bỏ VLAN tag 102 khỏi gói tin và chuyển gói tin đó tới  VLAN sub-interface port (13) trên the provider bridge.
-- B10.Security group rules (14) trên the provider bridge xử lý firewalling và theo dõi kết nối cho gói tin.
+- B10.Security group rules (14) trên the provider bridge xử lý firewalling và connection tracking packet.
 - B11. The provider bridge instance port (15) chuyển tiếp gói tin tới instance 2 interface (16).
 
 ![provider_us3](https://raw.githubusercontent.com/NTT-TNN/Basic_knowledge/master/images/neutron/provider_us3.png)
-
-_Note_: Ta thấy trong tất cả các trường hợp toàn bộ traffic đều phải đi qua physical network infrastrcture đó là nhược điểm của provider network. Để khắc phục vấn đề này người ta sử dụng kịch bản thứ 2(self-service network)
 
 ### Self-service Network
 
@@ -154,12 +165,16 @@ Cụ thể:
 - The instance đặt tại compute node 1 và sử dụng self-service network 1.
 - The instance gửi gói tin tới một host trên the Internet.
 
+
+#### Flow packet
+
 - B1. The instance interface (1) chuyển tiếp gói tin tới self-service bridge instance port (2).
-- B2. Security group rules (3) trên self-service bridge xử lý firewalling và theo dõi kết nối cho gói tin.
+- B2. Security group rules (3) trên self-service bridge xử lý firewalling và connection tracking packet.
 - B3. The self-service bridge chuyển tiếp gói tin tới  VXLAN interface (4) nơi mà sẽ đóng gói packet using VNI 101.
-- B4. The underlying physical interface (5) for the VXLAN interface chuyển tiếp gói tin đến network node via the overlay network (6).
-- B5. The underlying physical interface (7) for the VXLAN interface chuyển tiếp gói tin tới VXLAN interface (8) nơi sẽ mở gói tin.
+- B4. The underlying physical interface (5) for the VXLAN interface chuyển tiếp gói tin đến network node (overlay network) (6).
+- B5. The underlying physical interface (7) for the VXLAN interface chuyển tiếp gói tin tới VXLAN interface (8) nơi sẽ unwrap gói tin.
 - B6. The self-service bridge router port (9) chuyển gói tin tới self-service network interface (10) trên router namespace.
+    - Với Ipv4 router sử dụng cơ chế SNAT để thay đổi địa chỉ IP nguồn bằng địa chỉ IP của router provider network và chuyển packet tới gateway trên provider network.
 - B7. The router chuyển gói tin tới provider bridge router port (12).
 - B8. The VLAN sub-interface port (13) trên the provider bridge chuyển gói tin tới provider physical network interface (14).
 - B9. The provider physical network interface (14) thêm VLAN tag 101 vào packet và chuyển tới Internet via physical network infrastructure (15).
@@ -173,14 +188,17 @@ Cụ thể:
 - The instance resides on compute node 1 and uses self-service network 1.
 - A host on the Internet sends a packet to the instance.
 
+#### Flow packet
+
 - B1. The physical network infrastructure (1) chuyển gói tin tới provider physical network interface (2).
-- B2. The provider physical network interface gỡ bỏ VLAN tag 101 và chuyển gói tin tới  VLAN sub-interface on the provider bridge.
+- B2. The provider physical network interface gỡ bỏ VXLAN tag 101 và chuyển gói tin tới VXLAN sub-interface on the provider bridge.
 - B3. The provider bridge chuyển gói tin tới self-service router gateway port trên provider network (5).
+    - Với Ipv4 router sử dụng cơ chế SNAT để thay đổi địa chỉ IP đích bằng địa chỉ IP của router provider network và chuyển packet tới gateway trên provider network.
 - B4. The router chuyển gói tin tới self-service bridge router port (7).
 - B5. The self-service bridge chuyển tiếp gói tin tới  VXLAN interface (8) nơi mà gói tin sẽ được đóng gí sử dụng VNI 101.
 - B6. The underlying physical interface (9) for the VXLAN interface chuyển tiếp gói tin tới network node (overlay network) (10).
 - B7. The underlying physical interface (11) for the VXLAN interface chuyển tiếp gói tin tới VXLAN interface (12) nơi mà gói tin được unwrap.
-- B8. Security group rules (3) trên self-service bridge xử lý firewalling và theo dõi kết nối cho gói tin.
+- B8. Security group rules (3) trên self-service bridge xử lý firewalling và connection tracking packet.
 - B9. The self-service bridge instance port (14) chuyển tiếp gói tin tới instance interface (15).
 
 ![self_us2](https://raw.githubusercontent.com/NTT-TNN/Basic_knowledge/master/images/neutron/self_us2.png)
@@ -193,15 +211,17 @@ Cụ thể:
 - Instance 2 đặt tại compute node 2 vả sử dụng self-service network 1.
 - Instance 1 gửi gói tin tới instance 2.
 
+#### Flow packet
+
 - B1. The instance interface (1) chuyển tiếp gói tin tới self-service bridge instance port (2).
-- B2. Security group rules (3) trên self-service bridge xử lý firewalling và theo dõi kết nối cho gói tin.
+- B2. Security group rules (3) trên self-service bridge xử lý firewalling và connection tracking packet.
 - B3. The self-service bridge chuyển tiếp gói tin tới  VXLAN interface (4) nơi mà sẽ đóng gói packet using VNI 101.
-- B4. The underlying physical interface (5) for the VXLAN interface chuyển tiếp gói tin đến network node (the overlay network) (6).
+- B4. The underlying physical interface (5) for the VXLAN interface chuyển tiếp gói tin đến network node (overlay network) (6).
 - B5. The underlying physical interface (7) for the VXLAN interface chuyển tiếp gói tin tới  VXLAN interface (8) nơi mà sẽ unwrap gói tin.
 - B6.  The provider physical network interface gỡ bỏ VLAN tag 101 và chuyển gói tin tới  VLAN sub-interface on the provider bridge.
 - B7. The self-service bridge instance port (10) chuyển gói tin tới  instance 1 interface (11).
 
-![self_us3](https://raw.githubusercontent.com/NTT-TNN/Basic_knowledge/master/images/neutron/self_us2.png)
+![self_us3](https://raw.githubusercontent.com/NTT-TNN/Basic_knowledge/master/images/neutron/self_us3.png)
 
 ### Trường hợp 4: Hai instance thuộc hai network
 
@@ -211,10 +231,12 @@ Cụ thể:
 - Instance 2 đặt tại compute node 2 vả sử dụng self-service network 2.
 - Instance 1 gửi gói tin tới instance 2.
 
+#### Flow packet
+
 - B1. The instance interface (1) chuyển tiếp gói tin tới self-service bridge instance port (2).
-- B2. Security group rules (3) trên self-service bridge xử lý firewalling và theo dõi kết nối cho gói tin.
+- B2. Security group rules (3) trên self-service bridge xử lý firewalling và connection tracking packet.
 - B3. The self-service bridge chuyển tiếp gói tin tới  VXLAN interface (4) nơi mà sẽ đóng gói packet using VNI 101.
-- B4. The underlying physical interface (5) for the VXLAN interface chuyển tiếp gói tin đến network node () (6).
+- B4. The underlying physical interface (5) for the VXLAN interface chuyển tiếp gói tin đến network node (overlay network) (6).
 - B5.The underlying physical interface (7) for the VXLAN interface chuyển tiếp gói tin tới  VXLAN interface (8) nơi mà sẽ unwrap gói tin.
 - B6. The self-service bridge router port (9) chuyển tiếp gói tin tới self-service network 1 interface (10) in the router namespace.
 - B7. The router gửi gói tin tới next-hop IP address, thường là  the gateway IP address on self-service network 2(11).
@@ -222,11 +244,12 @@ Cụ thể:
 - B9. The self-service network 2 bridge chuyển tiếp gói tin tới the VXLAN interface (13) nơi mà gói tin sẽ được đóng gói sử dụng VNI 102.
 - B10. The physical network interface (14) for the VXLAN interface gửi gói tin tới compute node  (overlay network) (15).
 - B11. The underlying physical interface (16) for the VXLAN interface gửi gói tin tới VXLAN interface (17) nơi mã sẽ unwrap gói tin.
-- B12. Security group rules (3) trên self-service bridge xử lý firewalling và theo dõi kết nối cho gói tin.
-- B13. The self-service bridge instance port (19) chuyển tiếp gói tin tới instance 2 interface (20) via veth pair.
+- B12. Security group rules (3) trên self-service bridge xử lý firewalling và connection tracking packet.
+- B13. The self-service bridge instance port (19) chuyển tiếp gói tin tới instance 2 interface (20).
 
 ![self_us4](https://raw.githubusercontent.com/NTT-TNN/Basic_knowledge/master/images/neutron/self_us4.png)
 
 ## Tài liệu tham khảo
 [https://docs.openstack.org/newton/networking-guide/deploy-lb-provider.html#deploy-lb-provider](https://docs.openstack.org/newton/networking-guide/deploy-lb-provider.html#deploy-lb-provider)
 [https://docs.openstack.org/newton/networking-guide/deploy-lb-selfservice.html](https://docs.openstack.org/newton/networking-guide/deploy-lb-selfservice.html)
+[https://github.com/HPCC-Cloud-Computing/hpcc-know-how/blob/master/OpenStack/Networking-Neutron/Neutron-Introduction/OpenStack-networking-Layer2-Introduction.md](https://github.com/HPCC-Cloud-Computing/hpcc-know-how/blob/master/OpenStack/Networking-Neutron/Neutron-Introduction/OpenStack-networking-Layer2-Introduction.md)
