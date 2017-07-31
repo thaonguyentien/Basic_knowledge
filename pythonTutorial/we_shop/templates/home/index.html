@@ -94,13 +94,21 @@
                                             <div class="productinfo text-center">
                                                 <img src="{% static product.product_image %}" alt="" />
                                                 <h2>{{ product.product_price }}</h2>
-                                                <a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
+                                                <form action="{% url "cart:cart_add" product.product_id %}" method="post">
+                                                  {{ cart_product_form }}
+                                                  {% csrf_token %}
+                                                  <input type="submit" value="Add to cart">
+                                                </form>
                                             </div>
                                             <div class="product-overlay">
                                                 <div class="overlay-content">
                                                     <h2>{{ product.product_price }}</h2>
                                                     <p>{{ product.product_detail }}</p>
-                                                    <a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
+                                                    <form action="{% url "cart:cart_add" product.product_id %}" method="post">
+                                                      {{ cart_product_form }}
+                                                      {% csrf_token %}
+                                                      <input type="submit" value="Add to cart">
+                                                    </form>
                                                 </div>
                                             </div>
                                     </div>
