@@ -216,9 +216,13 @@ Ví dụ:
 
 ### 2.13 Docker run(Xem lại)
 
-Chạy một câu lệnh trong một container mới
+Chạy một command trong một container mới
 
 `docker run [OPTIONS] IMAGE [COMMAND] [ARG...]`
+
+Ví dụ:
+
+`docker run --name thao-test -it ubuntu`
 
 ### 2.14 Docker start
 
@@ -253,3 +257,94 @@ Stop một hoặc nhiều containers
 Ví dụ: `docker stop ubuntu1`
 
 ## Tạo image cho web bán hàng sử dụng django
+
+B1: Tạo một file có tên là `Dockerfile` tại thư mục gốc của ứng dụng django. Khi đó thư mục gốc sẽ có các file như sau:
+
+```s
+├── cart # ứng dụng của django
+├── db.sqlite3   # cở sở dữ liệu
+├── Dockerfile   # File Dockerfile vừa tạo
+├── home         # Ứng dụng của django
+├── manage.py    
+├── templates     
+└── we_shop
+
+```
+
+B2. Thêm nội dung sau vào file `Dockerfile`
+
+```s
+FROM python:2.7
+ENV PYTHONUNBUFFERED 1
+RUN mkdir /code
+WORKDIR /code
+ADD requirements.txt /code/
+RUN pip install -r requirements.txt
+ADD . /code/
+EXPOSE 8000
+CMD ["python", "manage.py", "runserver", "0.0.0.0:8000"]
+```
+
+B3. Tạo file `requirements.txt` cũng tại thư mục ứng dụng khi đó thư mục ứng dụng sẽ có các file là:
+
+```s
+├── cart
+├── db.sqlite3
+├── Dockerfile
+├── home
+├── manage.py
+├── requirements.txt
+├── templates
+└── we_shop
+```
+
+File `requirements.txt` sẻ được sử dụng bởi câu lệnh `RUN pip install -r requirements.txt` trong Dockerfile để cài các gói cần thiết cho ứng dụng khi build image.
+
+B4. Thêm nội dung sau vào file `requirements.txt`
+
+```s
+Django>=1.8,<2.0
+psycopg2
+django-dajaxice
+django-dajax
+```
+
+B5. Taoj file `docker-compose.yml` cũng tại thư mục ứng dụng khi đó thư mục ứng dụng sẽ có các file là:
+
+```s
+├── cart
+├── db.sqlite3
+├── docker-compose.yml
+├── Dockerfile
+├── home
+├── manage.py
+├── requirements.txt
+├── templates
+└── we_shop
+
+```
+
+B6. Thêm nội dung sau vào file `docker-compose.yml`
+
+```s
+version: '2'
+
+services:
+  web:
+    build: .
+    volumes:
+      - .:/code
+    ports:
+      - "8000:8000"
+
+```
+
+B7. Build image bằng câu lệnh
+
+`docker build  -t web_shop_docker:v0 .`
+
+B8. Run image bằng câu lệnh:
+
+`docker run -dit -p 8000:8000 --name web_shop_docker web_shop_docker:v0`
+
+Sau đó truy cập vào trình duyệt tại địa chỉ `http://127.0.0.1:8000/` để truy cập vào trang web
