@@ -214,7 +214,7 @@ Các options thường dùng là:
 Ví dụ:
 `thao-nt@thao-nt:~⟫ docker rmi ubuntu`
 
-### 2.14 Docker start
+### 2.13 Docker start
 
 Start một hoặc nhiều containers đã stop.
 
@@ -226,7 +226,7 @@ Các options thường dùng là:
 
 ví dụ: `thao-nt@thao-nt:~⟫ docker start nifty_euler`
 
-### 2.15 Docker stats
+### 2.14 Docker stats
 
 Hiển thị dữ liệu thống kê trực tiếp của container.
 
@@ -238,7 +238,7 @@ Các optins thường dùng là:
 
 ví dụ: `docker stats -a`
 
-### 2.16 Docker stop
+### 2.15 Docker stop
 
 Stop một hoặc nhiều containers
 
