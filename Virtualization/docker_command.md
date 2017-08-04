@@ -214,16 +214,6 @@ Các options thường dùng là:
 Ví dụ:
 `thao-nt@thao-nt:~⟫ docker rmi ubuntu`
 
-### 2.13 Docker run(Xem lại)
-
-Chạy một command trong một container mới
-
-`docker run [OPTIONS] IMAGE [COMMAND] [ARG...]`
-
-Ví dụ:
-
-`docker run --name thao-test -it ubuntu`
-
 ### 2.14 Docker start
 
 Start một hoặc nhiều containers đã stop.
